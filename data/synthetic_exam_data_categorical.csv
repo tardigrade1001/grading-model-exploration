@@ -1,0 +1,401 @@
+student_id,question_number,answer_text,marks_obtained,grade
+S001,1,Colorimetric biosensors using nanoparticles for TMB oxidation work because nanoparticles have large surface area and can catalyze the reaction better. The signal amplification is achieved through multiple mechanisms.,3.5,A
+S001,2,"Biofunctionalization: Start with AuNPs, modify surface with thiol-containing molecules, attach recognition elements like antibodies, characterize the conjugate. Specificity achieved through selective antibodies.",1.0,D
+S001,3,"Properties affecting performance: size, shape, surface charge, stability, optical properties, conductivity. Smaller nanomaterials have larger surface area. Different materials suit different applications.",1.0,D
+S001,4,LOD = 3.3 × (standard deviation of blank measured) / (slope of calibration line). It represents the lowest measurable concentration. Used to determine biosensor sensitivity.,2.0,C
+S002,1,"Nanomaterials enhance sensitivity by providing more sites for antibody attachment. Specificity is improved because the nanoparticles can be functionalized with specific ligands. The advantages are: enhanced sensitivity, improved specificity, faster response time, broader dynamic range, reduced interference, and cost effectiveness.",1.5,C
+S002,2,"The biofunctionalization process involves: 1) Surface modification with thiol groups 2) Attachment of biomolecules like antibodies 3) Verification of binding. Strategies to reduce interference: use blocking agents, selective detection methods, control experiments.",1.5,C
+S002,3,"For cancer biomarker detection, spherical AuNPs with 20-30nm size are suitable. Surface functionalized with thiol groups for antibody attachment. Known stability under physiological conditions.",1.5,C
+S002,4,LOD (Limit of Detection) is calculated based on standard deviation of the response and slope of calibration curve. LOD = 3 × SD of lowest concentration / slope. Used to evaluate detection capability.,1.0,D
+S003,1,Signal amplification in nanomaterial-based systems occurs because the high surface area to volume ratio allows for efficient immobilization of biomolecules. The colorimetric signal from TMB oxidation is more intense with nanoparticles.,3.5,A
+S003,2,AuNPs are functionalized by conjugating anti-neuraminidase antibodies to thiolated AuNPs. This provides high specificity due to antigen-antibody interaction. The sensor can detect target viruses specifically.,3.5,A
+S003,3,"Nanomaterial selection: consider target analyte (DNA, protein, small molecule), antibody compatibility, desired detection method (optical, electrochemical), signal amplification needs.",3.0,B
+S003,4,"Definition: LOD is the minimum concentration reliably detected. Calculation: measure blanks (n≥20), calculate SD, apply formula LOD = 3×SD/slope. Significance: determines analytical sensitivity.",1.0,D
+S004,1,TMB is oxidized by nanomaterials faster than by HRP. The blue color produced is more intense. This makes detection easier.,3.0,B
+S004,2,Achieving specificity involves using specific recognition elements like antibodies. These are highly selective for target molecules. Interference is minimized through blocking agents and washing steps.,2.5,B
+S004,3,"The criteria include: size and surface area (larger area for immobilization), shape (affects binding geometry), surface chemistry (ease of conjugation), biocompatibility (no cell toxicity).",1.0,D
+S004,4,The LOD determines the lowest analyte concentration that can be reliably detected but not quantified precisely. Formula uses statistical approach with 3x or 3.3x factor.,1.0,D
+S005,1,"The mechanisms involve enhanced surface area, signal amplification, improved stability, reduced non-specific interactions and tunable properties. Nanoparticles like AuNPs and graphene oxide can significantly enhance the colorimetric signal.",1.0,D
+S005,2,Biofunctionalization makes AuNPs into biosensors. The surface is modified to bind target molecules specifically. Cross-reactivity is avoided through careful choice of recognition elements.,1.5,C
+S005,3,"Physicochemical properties: size affects sensitivity, surface chemistry affects specificity, stability ensures reliability, optical properties enable detection.",1.5,C
+S005,4,LOD is a statistical measure. Formula: LOD = 3 × (standard deviation of baseline) / (slope of calibration line). Shows lowest detectable concentration.,1.0,D
+S006,1,Nanomaterials provide high surface area for enzyme immobilization. This increases the number of enzyme molecules available for the reaction. More enzymes means more TMB oxidation and stronger color signal.,3.0,B
+S006,2,"AuNPs can be functionalized with antibodies, DNA, or other biomolecules. This confers selectivity. Specificity depends on the binding affinity of the recognition element chosen.",1.5,C
+S006,3,"Most important criteria: biocompatibility, size and surface area, stability, optical properties. Example: Quantum dots with tunable fluorescence for sensitive detection.",3.5,A
+S006,4,LOD definition is given. Calculated using LOD = 3 × SD / slope. Important for knowing detection sensitivity of biosensor method.,3.0,B
+S007,1,"Advantages include: better sensitivity because of signal amplification, improved specificity through functionalization with antibodies, better stability than HRP, miniaturization possible, and lower cost. The nanomaterials act as catalytic centers.",1.5,C
+S007,2,Surface modification of AuNPs is achieved through thiol chemistry. Au-S bond is very strong. This allows stable attachment of biomolecules.,2.5,B
+S007,3,Size directly correlates with surface area. Smaller particles = higher surface area = more antibody immobilization = higher sensitivity.,3.0,B
+S007,4,Limit of Detection defined as minimum detectable concentration. Formula involves standard deviation and slope. The 3x factor is based on statistical consideration.,2.0,C
+S008,1,Colorimetric detection using TMB and nanomaterials is superior because the nanoparticles catalyze the reaction. The blue color is more visible and can be detected easier. Also the assay is faster.,4.0,A
+S008,2,"Strategies to enhance selectivity: use specific antibodies, employ blocking agents, use signal amplification, implement multiplexing, pre-treat samples, optimize conditions.",4.0,A
+S008,3,Surface chemistry impacts the ease of attaching biomolecules. Different functional groups suit different conjugation strategies. Stability under assay conditions is critical.,1.0,D
+S008,4,LOD tells us sensitivity of measurement method. Calculated as LOD = 3.3 × SD of blank / slope. Different for each instrument.,1.5,C
+S009,1,"Nanoparticles increase sensitivity through catalytic activity. They improve specificity by selective functionalization. The signal is amplified due to the high surface area. Advantages: enhanced sensitivity, improved specificity, stability, miniaturization, cost-effectiveness.",3.5,A
+S009,2,"Biofunctionalization steps: synthesis of AuNPs, surface modification with thiol groups, activation of thiol groups, coupling with biomolecules, purification, characterization, application.",2.5,B
+S009,3,"Selecting appropriate nanomaterial requires considering: the target molecule characteristics, antibody type being used, detection method chosen, desired sensitivity level.",2.0,C
+S009,4,LOD is minimum analyte concentration detectable. Using formula with standard deviation and slope. The value depends on noise and signal response.,2.0,C
+S010,1,The nanomaterials enhance the oxidation of TMB compared to HRP enzyme. Surface area is larger so more binding sites. Catalytic properties are better.,1.5,C
+S010,2,The binding specificity is enhanced by using well-chosen recognition elements like antibodies. Optimization of conditions also improves specificity. Cross-reactivity can be reduced.,1.5,C
+S010,3,"Nanomaterial properties: size (20-100nm optimal), shape (spherical preferred), surface chemistry (functionalized with thiol or amino groups), stability (in pH 4-8 range).",4.0,A
+S010,4,"Significance of LOD: it provides the detection limit, helps compare different biosensor methods, indicates measurement system capability.",2.0,C
+S011,1,"Signal amplification mechanisms: electrochemical amplification, colorimetric amplification where nanoparticles serve as catalytic centers, improved stability. This is better than traditional HRP-based biosensors.",1.0,D
+S011,2,AuNPs functionalized with antibodies can selectively bind antigens. The antigen-antibody interaction is specific. False positives are reduced through control experiments.,1.0,D
+S011,3,"For antibody-based biosensing: choose nanoparticles with high biocompatibility, suitable surface for antibody conjugation, stability in physiological conditions.",2.5,B
+S011,4,LOD very important. It tells lowest concentration can detect. Using standard deviation and slope of calibration for calculation.,1.0,D
+S012,1,Nanoparticles like gold have high surface area. They can immobilize many biomolecules. This increases detection sensitivity. TMB oxidation produces blue color which is easy to detect visually or with optical methods.,2.0,C
+S012,2,"Biofunctionalization through: attachment of biomolecules to AuNP surface, use of thiol chemistry for strong bonding, selection of specific recognition elements. Interference reduced by: blocking non-specific sites.",4.0,A
+S012,3,"Factors affecting performance: nanomaterial size, surface area available, charge on surface, chemical reactivity, resistance to degradation.",2.0,C
+S012,4,"LOD definition given, formula mentioned as LOD = 3 × SD / slope. Used for assessing analytical method sensitivity.",2.0,C
+S013,1,Nanomaterials are better because they have catalytic properties. The large surface area allows more immobilization of recognition elements. The color change is more intense.,4.0,A
+S013,2,"To achieve specificity: choose highly specific antibodies, use molecular imprinting, employ dual recognition with multiple elements, add blocking agents, use sample pre-treatment.",1.0,D
+S013,3,Quantum dots show excellent properties for biosensing due to tunable fluorescence. Carbon nanotubes offer versatile surface chemistry. Gold nanoparticles are stable and easy to functionalize.,3.5,A
+S013,4,The LOD is the minimum concentration that can be detected. It's calculated from blank sample variability and instrument response. Important for analytical method validation.,3.0,B
+S014,1,Enhanced sensitivity comes from the high surface area-to-volume ratio of nanoparticles. This allows immobilization of more enzyme molecules. Signal amplification is achieved through catalytic activity of the nanoparticles.,3.0,B
+S014,2,"AuNP biofunctionalization achieved by thiolation followed by antibody conjugation. Specificity from antigen-antibody recognition. Strategies: blocking, washing, signal amplification.",1.0,D
+S014,3,"Key considerations: size (determines surface area and sensitivity), material composition (affects optical/electrical properties), surface modification ease, cost and availability.",2.5,B
+S014,4,LOD = 3 × standard deviation of lowest concentration / slope of calibration line. This gives the detection limit of the method.,1.0,D
+S015,1,TMB and nanomaterials combination works well. The nanoparticles catalyze the oxidation reaction. This produces a strong blue color that can be detected easily even at low concentrations of analyte.,3.0,B
+S015,2,Biofunctionalization process involves modifying gold surface with biologically active molecules. These bind target molecules selectively. Interference minimized through experimental design.,2.0,C
+S015,3,"Selection criteria: compatibility with antibodies, ability to amplify signal, stability in storage and assay, biocompatibility for biological systems.",4.0,A
+S015,4,Definition: lowest detectable concentration. Calculation: standard deviation approach. Significance: measures method sensitivity and detection capability.,2.0,C
+S016,1,The advantages of nanomaterial-based TMB biosensors: 1) Enhanced sensitivity 2) Improved specificity 3) Stability 4) Lower cost 5) Miniaturization 6) Portability. The mechanisms involve surface area and catalytic properties.,3.0,B
+S016,2,"Specific binding achieved through: complementary interaction between functionalized AuNPs and target, optimized conditions, and proper blocking of unreactive sites.",1.5,C
+S016,3,"Physicochemical properties include: size (affects sensitivity), surface area (affects binding capacity), shape (affects field distribution), electrical properties (for conductivity-based detection).",3.5,A
+S016,4,LOD is lowest amount detectible.,1.0,D
+S017,1,Nanomaterials provide more surface area compared to traditional methods. This means more antibodies can bind. The specificity is high because functionalization with specific ligands. The signal is stronger because nanoparticles amplify it.,1.0,D
+S017,2,AuNPs functionalized with antibodies provide specific binding. The high affinity and selectivity of antibodies ensure specificity. Interference from non-target molecules is minimized.,3.5,A
+S017,3,Size matters. Smaller is better for sensitivity. That's the main factor.,1.5,C
+S017,4,LOD = 3 times SD divided by slope. It's the detection limit.,2.0,C
+S018,1,Colorimetric biosensors using nanomaterials for TMB oxidation enhance sensitivity by providing more binding sites and improving catalytic activity. Specificity is improved by functionalizing nanoparticles with specific recognition elements like antibodies.,1.0,D
+S018,2,Simple answer. AuNPs bind to targets through antibodies. This is specific.,4.0,A
+S018,3,Surface chemistry affects how antibodies attach. Stability is important. Size affects sensitivity.,1.5,C
+S018,4,Limit of Detection is minimum concentration. Formula uses SD and slope. Important for biosensor sensitivity.,1.0,D
+S019,1,Short answer but not complete understanding shown. TMB is oxidized faster by nanomaterials.,2.5,B
+S019,2,Biofunctionalization means attaching antibodies to gold. The antibodies bind target molecules specifically.,2.0,C
+S019,3,"Nanomaterial properties important for performance: size, shape, surface chemistry. These affect how well antibodies bind and detect targets.",2.5,B
+S019,4,LOD definition: minimum detectable concentration. Formula: LOD = 3 × SD / slope of calibration.,2.0,C
+S020,1,Nanomaterials work better. The reason is the high surface area. More enzyme can be attached. Better sensitivity.,1.5,C
+S020,2,AuNPs are modified with thiol groups then antibodies. This gives specificity through antibody-antigen binding.,2.0,C
+S020,3,"Criteria for selection: size and shape, surface chemical groups, stability in physiological conditions, optical or electrical properties for detection.",2.0,C
+S020,4,"Significance of LOD: tells you detection limits, helps validate methods, compares sensors.",1.5,C
+S021,1,The nanoparticles catalyze TMB oxidation producing blue color. This is detected easily. The system is more sensitive and specific than HRP.,3.5,A
+S021,2,"Achieving specificity: use antibodies for recognition, block non-specific sites, use controls, optimize pH and conditions.",2.0,C
+S021,3,Biocompatibility important to avoid toxicity. Surface area determines antibody loading. Stability ensures consistent results.,3.5,A
+S021,4,"LOD is the limit of detection, the minimum concentration of analyte that can be reliably detected but not quantified. Calculated as LOD = 3 × (standard deviation of blank) / slope of calibration curve. It's significant because it tells us the sensitivity of the method.",1.0,D
+S022,1,"Sensitivity enhanced through: signal amplification from catalytic properties. Specificity improved through: selective functionalization. Advantages: faster response, broader range, reduced interference.",3.0,B
+S022,2,Biofunctionalization through thiol chemistry. Specificity through selective antibody binding. Interference reduced by blocking and washing.,3.5,A
+S022,3,Size and surface area of nanomaterials directly affect sensitivity. Smaller particles have larger surface area for antibody immobilization. Shape also affects orientation of antibodies.,1.5,C
+S022,4,Limit of Detection is the lowest concentration detectable. Formula: LOD = 3.3 × SD of blank / slope. This is important for knowing the detection capability of the biosensor.,1.5,C
+S023,1,Gold nanoparticles and graphene oxide can enhance the sensitivity of TMB-based colorimetric biosensors. The catalytic activity is increased. The color change is more intense and easily detectable.,1.5,C
+S023,2,Biofunctionalization of AuNPs involves modifying the surface with biomolecules. This is done through thiol chemistry where thiolated molecules bind to gold surface. The specificity comes from antibody-antigen interactions.,2.5,B
+S023,3,"Physicochemical properties like size, surface chemistry, stability affect performance. Smaller nanoparticles provide higher surface area for antibody attachment. This improves sensitivity.",2.5,B
+S023,4,LOD represents the lowest analyte concentration that can be reliably detected. Calculated using the formula LOD = 3 × SD of lowest concentration / slope of calibration line. Determines the sensitivity limit.,2.0,C
+S024,1,Nanomaterials like gold nanoparticles have high surface area which allows more enzyme molecules to be immobilized. This increases sensitivity. Also the catalytic activity is enhanced leading to faster oxidation of TMB.,3.5,A
+S024,2,AuNPs are functionalized by attaching antibodies to their surface. This allows them to bind specific target molecules. Interference is reduced by blocking non-specific binding sites.,3.5,A
+S024,3,"Selection criteria: size (affects sensitivity), surface chemistry (affects conjugation), stability (affects reliability), biocompatibility (affects safety), cost (practical consideration).",3.0,B
+S024,4,"LOD is important parameter in analytical chemistry. It's the minimum concentration detectable. Using n=20 replicates of blank, we calculate mean and standard deviation, then LOD = mean + 2SD.",1.5,C
+S025,1,TMB gets oxidized to blue color. Nanomaterials make this reaction faster and produce more intense color. This is better than HRP because nanoparticles are more stable.,3.5,A
+S025,2,Gold nanoparticles can be biofunctionalized through various methods. Thiol groups bind strongly to gold. Antibodies are attached for specific binding.,2.0,C
+S025,3,Size of nanomaterials affects sensitivity. Smaller size means larger surface area-to-volume ratio. This allows more antibodies to attach. Surface chemistry determines ease of functionalization.,4.0,A
+S025,4,The Limit of Detection is defined as the minimum concentration that can be distinguished with 99% fidelity. Formula: LOD = 3E/S where E is standard deviation and S is slope.,1.0,D
+S026,1,Colorimetric biosensors using nanoparticles for TMB oxidation work because nanoparticles have large surface area and can catalyze the reaction better. The signal amplification is achieved through multiple mechanisms.,1.5,C
+S026,2,"Biofunctionalization: Start with AuNPs, modify surface with thiol-containing molecules, attach recognition elements like antibodies, characterize the conjugate. Specificity achieved through selective antibodies.",4.0,A
+S026,3,"Properties affecting performance: size, shape, surface charge, stability, optical properties, conductivity. Smaller nanomaterials have larger surface area. Different materials suit different applications.",1.0,D
+S026,4,LOD = 3.3 × (standard deviation of blank measured) / (slope of calibration line). It represents the lowest measurable concentration. Used to determine biosensor sensitivity.,2.0,C
+S027,1,"Nanomaterials enhance sensitivity by providing more sites for antibody attachment. Specificity is improved because the nanoparticles can be functionalized with specific ligands. The advantages are: enhanced sensitivity, improved specificity, faster response time, broader dynamic range, reduced interference, and cost effectiveness.",2.5,B
+S027,2,"The biofunctionalization process involves: 1) Surface modification with thiol groups 2) Attachment of biomolecules like antibodies 3) Verification of binding. Strategies to reduce interference: use blocking agents, selective detection methods, control experiments.",2.0,C
+S027,3,"For cancer biomarker detection, spherical AuNPs with 20-30nm size are suitable. Surface functionalized with thiol groups for antibody attachment. Known stability under physiological conditions.",1.0,D
+S027,4,LOD (Limit of Detection) is calculated based on standard deviation of the response and slope of calibration curve. LOD = 3 × SD of lowest concentration / slope. Used to evaluate detection capability.,1.5,C
+S028,1,Signal amplification in nanomaterial-based systems occurs because the high surface area to volume ratio allows for efficient immobilization of biomolecules. The colorimetric signal from TMB oxidation is more intense with nanoparticles.,3.0,B
+S028,2,AuNPs are functionalized by conjugating anti-neuraminidase antibodies to thiolated AuNPs. This provides high specificity due to antigen-antibody interaction. The sensor can detect target viruses specifically.,3.5,A
+S028,3,"Nanomaterial selection: consider target analyte (DNA, protein, small molecule), antibody compatibility, desired detection method (optical, electrochemical), signal amplification needs.",2.0,C
+S028,4,"Definition: LOD is the minimum concentration reliably detected. Calculation: measure blanks (n≥20), calculate SD, apply formula LOD = 3×SD/slope. Significance: determines analytical sensitivity.",1.5,C
+S029,1,TMB is oxidized by nanomaterials faster than by HRP. The blue color produced is more intense. This makes detection easier.,3.5,A
+S029,2,Achieving specificity involves using specific recognition elements like antibodies. These are highly selective for target molecules. Interference is minimized through blocking agents and washing steps.,2.5,B
+S029,3,"The criteria include: size and surface area (larger area for immobilization), shape (affects binding geometry), surface chemistry (ease of conjugation), biocompatibility (no cell toxicity).",2.5,B
+S029,4,The LOD determines the lowest analyte concentration that can be reliably detected but not quantified precisely. Formula uses statistical approach with 3x or 3.3x factor.,3.0,B
+S030,1,"The mechanisms involve enhanced surface area, signal amplification, improved stability, reduced non-specific interactions and tunable properties. Nanoparticles like AuNPs and graphene oxide can significantly enhance the colorimetric signal.",1.5,C
+S030,2,Biofunctionalization makes AuNPs into biosensors. The surface is modified to bind target molecules specifically. Cross-reactivity is avoided through careful choice of recognition elements.,2.0,C
+S030,3,"Physicochemical properties: size affects sensitivity, surface chemistry affects specificity, stability ensures reliability, optical properties enable detection.",1.5,C
+S030,4,LOD is a statistical measure. Formula: LOD = 3 × (standard deviation of baseline) / (slope of calibration line). Shows lowest detectable concentration.,1.5,C
+S031,1,Nanomaterials provide high surface area for enzyme immobilization. This increases the number of enzyme molecules available for the reaction. More enzymes means more TMB oxidation and stronger color signal.,3.5,A
+S031,2,"AuNPs can be functionalized with antibodies, DNA, or other biomolecules. This confers selectivity. Specificity depends on the binding affinity of the recognition element chosen.",3.0,B
+S031,3,"Most important criteria: biocompatibility, size and surface area, stability, optical properties. Example: Quantum dots with tunable fluorescence for sensitive detection.",3.0,B
+S031,4,LOD definition is given. Calculated using LOD = 3 × SD / slope. Important for knowing detection sensitivity of biosensor method.,2.0,C
+S032,1,"Advantages include: better sensitivity because of signal amplification, improved specificity through functionalization with antibodies, better stability than HRP, miniaturization possible, and lower cost. The nanomaterials act as catalytic centers.",3.5,A
+S032,2,Surface modification of AuNPs is achieved through thiol chemistry. Au-S bond is very strong. This allows stable attachment of biomolecules.,3.0,B
+S032,3,Size directly correlates with surface area. Smaller particles = higher surface area = more antibody immobilization = higher sensitivity.,2.5,B
+S032,4,Limit of Detection defined as minimum detectable concentration. Formula involves standard deviation and slope. The 3x factor is based on statistical consideration.,3.0,B
+S033,1,Colorimetric detection using TMB and nanomaterials is superior because the nanoparticles catalyze the reaction. The blue color is more visible and can be detected easier. Also the assay is faster.,2.0,C
+S033,2,"Strategies to enhance selectivity: use specific antibodies, employ blocking agents, use signal amplification, implement multiplexing, pre-treat samples, optimize conditions.",1.5,C
+S033,3,Surface chemistry impacts the ease of attaching biomolecules. Different functional groups suit different conjugation strategies. Stability under assay conditions is critical.,1.5,C
+S033,4,LOD tells us sensitivity of measurement method. Calculated as LOD = 3.3 × SD of blank / slope. Different for each instrument.,3.0,B
+S034,1,"Nanoparticles increase sensitivity through catalytic activity. They improve specificity by selective functionalization. The signal is amplified due to the high surface area. Advantages: enhanced sensitivity, improved specificity, stability, miniaturization, cost-effectiveness.",1.0,D
+S034,2,"Biofunctionalization steps: synthesis of AuNPs, surface modification with thiol groups, activation of thiol groups, coupling with biomolecules, purification, characterization, application.",4.0,A
+S034,3,"Selecting appropriate nanomaterial requires considering: the target molecule characteristics, antibody type being used, detection method chosen, desired sensitivity level.",1.0,D
+S034,4,LOD is minimum analyte concentration detectable. Using formula with standard deviation and slope. The value depends on noise and signal response.,1.0,D
+S035,1,The nanomaterials enhance the oxidation of TMB compared to HRP enzyme. Surface area is larger so more binding sites. Catalytic properties are better.,1.5,C
+S035,2,The binding specificity is enhanced by using well-chosen recognition elements like antibodies. Optimization of conditions also improves specificity. Cross-reactivity can be reduced.,3.5,A
+S035,3,"Nanomaterial properties: size (20-100nm optimal), shape (spherical preferred), surface chemistry (functionalized with thiol or amino groups), stability (in pH 4-8 range).",1.5,C
+S035,4,"Significance of LOD: it provides the detection limit, helps compare different biosensor methods, indicates measurement system capability.",3.0,B
+S036,1,"Signal amplification mechanisms: electrochemical amplification, colorimetric amplification where nanoparticles serve as catalytic centers, improved stability. This is better than traditional HRP-based biosensors.",3.0,B
+S036,2,AuNPs functionalized with antibodies can selectively bind antigens. The antigen-antibody interaction is specific. False positives are reduced through control experiments.,1.0,D
+S036,3,"For antibody-based biosensing: choose nanoparticles with high biocompatibility, suitable surface for antibody conjugation, stability in physiological conditions.",2.5,B
+S036,4,LOD very important. It tells lowest concentration can detect. Using standard deviation and slope of calibration for calculation.,3.0,B
+S037,1,Nanoparticles like gold have high surface area. They can immobilize many biomolecules. This increases detection sensitivity. TMB oxidation produces blue color which is easy to detect visually or with optical methods.,3.0,B
+S037,2,"Biofunctionalization through: attachment of biomolecules to AuNP surface, use of thiol chemistry for strong bonding, selection of specific recognition elements. Interference reduced by: blocking non-specific sites.",2.5,B
+S037,3,"Factors affecting performance: nanomaterial size, surface area available, charge on surface, chemical reactivity, resistance to degradation.",3.0,B
+S037,4,"LOD definition given, formula mentioned as LOD = 3 × SD / slope. Used for assessing analytical method sensitivity.",2.0,C
+S038,1,Nanomaterials are better because they have catalytic properties. The large surface area allows more immobilization of recognition elements. The color change is more intense.,3.0,B
+S038,2,"To achieve specificity: choose highly specific antibodies, use molecular imprinting, employ dual recognition with multiple elements, add blocking agents, use sample pre-treatment.",4.0,A
+S038,3,Quantum dots show excellent properties for biosensing due to tunable fluorescence. Carbon nanotubes offer versatile surface chemistry. Gold nanoparticles are stable and easy to functionalize.,1.0,D
+S038,4,The LOD is the minimum concentration that can be detected. It's calculated from blank sample variability and instrument response. Important for analytical method validation.,1.0,D
+S039,1,Enhanced sensitivity comes from the high surface area-to-volume ratio of nanoparticles. This allows immobilization of more enzyme molecules. Signal amplification is achieved through catalytic activity of the nanoparticles.,3.5,A
+S039,2,"AuNP biofunctionalization achieved by thiolation followed by antibody conjugation. Specificity from antigen-antibody recognition. Strategies: blocking, washing, signal amplification.",3.0,B
+S039,3,"Key considerations: size (determines surface area and sensitivity), material composition (affects optical/electrical properties), surface modification ease, cost and availability.",4.0,A
+S039,4,LOD = 3 × standard deviation of lowest concentration / slope of calibration line. This gives the detection limit of the method.,2.0,C
+S040,1,TMB and nanomaterials combination works well. The nanoparticles catalyze the oxidation reaction. This produces a strong blue color that can be detected easily even at low concentrations of analyte.,4.0,A
+S040,2,Biofunctionalization process involves modifying gold surface with biologically active molecules. These bind target molecules selectively. Interference minimized through experimental design.,3.5,A
+S040,3,"Selection criteria: compatibility with antibodies, ability to amplify signal, stability in storage and assay, biocompatibility for biological systems.",2.0,C
+S040,4,Definition: lowest detectable concentration. Calculation: standard deviation approach. Significance: measures method sensitivity and detection capability.,1.0,D
+S041,1,The advantages of nanomaterial-based TMB biosensors: 1) Enhanced sensitivity 2) Improved specificity 3) Stability 4) Lower cost 5) Miniaturization 6) Portability. The mechanisms involve surface area and catalytic properties.,2.0,C
+S041,2,"Specific binding achieved through: complementary interaction between functionalized AuNPs and target, optimized conditions, and proper blocking of unreactive sites.",2.5,B
+S041,3,"Physicochemical properties include: size (affects sensitivity), surface area (affects binding capacity), shape (affects field distribution), electrical properties (for conductivity-based detection).",1.5,C
+S041,4,LOD is lowest amount detectible.,3.0,B
+S042,1,Nanomaterials provide more surface area compared to traditional methods. This means more antibodies can bind. The specificity is high because functionalization with specific ligands. The signal is stronger because nanoparticles amplify it.,1.0,D
+S042,2,AuNPs functionalized with antibodies provide specific binding. The high affinity and selectivity of antibodies ensure specificity. Interference from non-target molecules is minimized.,3.5,A
+S042,3,Size matters. Smaller is better for sensitivity. That's the main factor.,3.5,A
+S042,4,LOD = 3 times SD divided by slope. It's the detection limit.,2.0,C
+S043,1,Colorimetric biosensors using nanomaterials for TMB oxidation enhance sensitivity by providing more binding sites and improving catalytic activity. Specificity is improved by functionalizing nanoparticles with specific recognition elements like antibodies.,3.0,B
+S043,2,Simple answer. AuNPs bind to targets through antibodies. This is specific.,4.0,A
+S043,3,Surface chemistry affects how antibodies attach. Stability is important. Size affects sensitivity.,1.5,C
+S043,4,Limit of Detection is minimum concentration. Formula uses SD and slope. Important for biosensor sensitivity.,1.0,D
+S044,1,Short answer but not complete understanding shown. TMB is oxidized faster by nanomaterials.,4.0,A
+S044,2,Biofunctionalization means attaching antibodies to gold. The antibodies bind target molecules specifically.,3.5,A
+S044,3,"Nanomaterial properties important for performance: size, shape, surface chemistry. These affect how well antibodies bind and detect targets.",2.0,C
+S044,4,LOD definition: minimum detectable concentration. Formula: LOD = 3 × SD / slope of calibration.,1.5,C
+S045,1,Nanomaterials work better. The reason is the high surface area. More enzyme can be attached. Better sensitivity.,1.5,C
+S045,2,AuNPs are modified with thiol groups then antibodies. This gives specificity through antibody-antigen binding.,2.0,C
+S045,3,"Criteria for selection: size and shape, surface chemical groups, stability in physiological conditions, optical or electrical properties for detection.",4.0,A
+S045,4,"Significance of LOD: tells you detection limits, helps validate methods, compares sensors.",1.5,C
+S046,1,The nanoparticles catalyze TMB oxidation producing blue color. This is detected easily. The system is more sensitive and specific than HRP.,3.0,B
+S046,2,"Achieving specificity: use antibodies for recognition, block non-specific sites, use controls, optimize pH and conditions.",4.0,A
+S046,3,Biocompatibility important to avoid toxicity. Surface area determines antibody loading. Stability ensures consistent results.,3.0,B
+S046,4,"LOD is the limit of detection, the minimum concentration of analyte that can be reliably detected but not quantified. Calculated as LOD = 3 × (standard deviation of blank) / slope of calibration curve. It's significant because it tells us the sensitivity of the method.",1.0,D
+S047,1,"Sensitivity enhanced through: signal amplification from catalytic properties. Specificity improved through: selective functionalization. Advantages: faster response, broader range, reduced interference.",3.0,B
+S047,2,Biofunctionalization through thiol chemistry. Specificity through selective antibody binding. Interference reduced by blocking and washing.,2.0,C
+S047,3,Size and surface area of nanomaterials directly affect sensitivity. Smaller particles have larger surface area for antibody immobilization. Shape also affects orientation of antibodies.,2.5,B
+S047,4,Limit of Detection is the lowest concentration detectable. Formula: LOD = 3.3 × SD of blank / slope. This is important for knowing the detection capability of the biosensor.,1.0,D
+S048,1,Gold nanoparticles and graphene oxide can enhance the sensitivity of TMB-based colorimetric biosensors. The catalytic activity is increased. The color change is more intense and easily detectable.,1.0,D
+S048,2,Biofunctionalization of AuNPs involves modifying the surface with biomolecules. This is done through thiol chemistry where thiolated molecules bind to gold surface. The specificity comes from antibody-antigen interactions.,2.0,C
+S048,3,"Physicochemical properties like size, surface chemistry, stability affect performance. Smaller nanoparticles provide higher surface area for antibody attachment. This improves sensitivity.",4.0,A
+S048,4,LOD represents the lowest analyte concentration that can be reliably detected. Calculated using the formula LOD = 3 × SD of lowest concentration / slope of calibration line. Determines the sensitivity limit.,2.0,C
+S049,1,Nanomaterials like gold nanoparticles have high surface area which allows more enzyme molecules to be immobilized. This increases sensitivity. Also the catalytic activity is enhanced leading to faster oxidation of TMB.,1.5,C
+S049,2,AuNPs are functionalized by attaching antibodies to their surface. This allows them to bind specific target molecules. Interference is reduced by blocking non-specific binding sites.,1.0,D
+S049,3,"Selection criteria: size (affects sensitivity), surface chemistry (affects conjugation), stability (affects reliability), biocompatibility (affects safety), cost (practical consideration).",1.5,C
+S049,4,"LOD is important parameter in analytical chemistry. It's the minimum concentration detectable. Using n=20 replicates of blank, we calculate mean and standard deviation, then LOD = mean + 2SD.",1.0,D
+S050,1,TMB gets oxidized to blue color. Nanomaterials make this reaction faster and produce more intense color. This is better than HRP because nanoparticles are more stable.,1.0,D
+S050,2,Gold nanoparticles can be biofunctionalized through various methods. Thiol groups bind strongly to gold. Antibodies are attached for specific binding.,3.5,A
+S050,3,Size of nanomaterials affects sensitivity. Smaller size means larger surface area-to-volume ratio. This allows more antibodies to attach. Surface chemistry determines ease of functionalization.,2.5,B
+S050,4,The Limit of Detection is defined as the minimum concentration that can be distinguished with 99% fidelity. Formula: LOD = 3E/S where E is standard deviation and S is slope.,1.0,D
+S051,1,Colorimetric biosensors using nanoparticles for TMB oxidation work because nanoparticles have large surface area and can catalyze the reaction better. The signal amplification is achieved through multiple mechanisms.,4.0,A
+S051,2,"Biofunctionalization: Start with AuNPs, modify surface with thiol-containing molecules, attach recognition elements like antibodies, characterize the conjugate. Specificity achieved through selective antibodies.",3.0,B
+S051,3,"Properties affecting performance: size, shape, surface charge, stability, optical properties, conductivity. Smaller nanomaterials have larger surface area. Different materials suit different applications.",4.0,A
+S051,4,LOD = 3.3 × (standard deviation of blank measured) / (slope of calibration line). It represents the lowest measurable concentration. Used to determine biosensor sensitivity.,1.5,C
+S052,1,"Nanomaterials enhance sensitivity by providing more sites for antibody attachment. Specificity is improved because the nanoparticles can be functionalized with specific ligands. The advantages are: enhanced sensitivity, improved specificity, faster response time, broader dynamic range, reduced interference, and cost effectiveness.",1.5,C
+S052,2,"The biofunctionalization process involves: 1) Surface modification with thiol groups 2) Attachment of biomolecules like antibodies 3) Verification of binding. Strategies to reduce interference: use blocking agents, selective detection methods, control experiments.",3.5,A
+S052,3,"For cancer biomarker detection, spherical AuNPs with 20-30nm size are suitable. Surface functionalized with thiol groups for antibody attachment. Known stability under physiological conditions.",2.5,B
+S052,4,LOD (Limit of Detection) is calculated based on standard deviation of the response and slope of calibration curve. LOD = 3 × SD of lowest concentration / slope. Used to evaluate detection capability.,1.5,C
+S053,1,Signal amplification in nanomaterial-based systems occurs because the high surface area to volume ratio allows for efficient immobilization of biomolecules. The colorimetric signal from TMB oxidation is more intense with nanoparticles.,2.0,C
+S053,2,AuNPs are functionalized by conjugating anti-neuraminidase antibodies to thiolated AuNPs. This provides high specificity due to antigen-antibody interaction. The sensor can detect target viruses specifically.,3.0,B
+S053,3,"Nanomaterial selection: consider target analyte (DNA, protein, small molecule), antibody compatibility, desired detection method (optical, electrochemical), signal amplification needs.",4.0,A
+S053,4,"Definition: LOD is the minimum concentration reliably detected. Calculation: measure blanks (n≥20), calculate SD, apply formula LOD = 3×SD/slope. Significance: determines analytical sensitivity.",3.0,B
+S054,1,TMB is oxidized by nanomaterials faster than by HRP. The blue color produced is more intense. This makes detection easier.,1.5,C
+S054,2,Achieving specificity involves using specific recognition elements like antibodies. These are highly selective for target molecules. Interference is minimized through blocking agents and washing steps.,3.0,B
+S054,3,"The criteria include: size and surface area (larger area for immobilization), shape (affects binding geometry), surface chemistry (ease of conjugation), biocompatibility (no cell toxicity).",4.0,A
+S054,4,The LOD determines the lowest analyte concentration that can be reliably detected but not quantified precisely. Formula uses statistical approach with 3x or 3.3x factor.,1.5,C
+S055,1,"The mechanisms involve enhanced surface area, signal amplification, improved stability, reduced non-specific interactions and tunable properties. Nanoparticles like AuNPs and graphene oxide can significantly enhance the colorimetric signal.",3.5,A
+S055,2,Biofunctionalization makes AuNPs into biosensors. The surface is modified to bind target molecules specifically. Cross-reactivity is avoided through careful choice of recognition elements.,2.0,C
+S055,3,"Physicochemical properties: size affects sensitivity, surface chemistry affects specificity, stability ensures reliability, optical properties enable detection.",2.5,B
+S055,4,LOD is a statistical measure. Formula: LOD = 3 × (standard deviation of baseline) / (slope of calibration line). Shows lowest detectable concentration.,2.0,C
+S056,1,Nanomaterials provide high surface area for enzyme immobilization. This increases the number of enzyme molecules available for the reaction. More enzymes means more TMB oxidation and stronger color signal.,2.5,B
+S056,2,"AuNPs can be functionalized with antibodies, DNA, or other biomolecules. This confers selectivity. Specificity depends on the binding affinity of the recognition element chosen.",3.0,B
+S056,3,"Most important criteria: biocompatibility, size and surface area, stability, optical properties. Example: Quantum dots with tunable fluorescence for sensitive detection.",2.5,B
+S056,4,LOD definition is given. Calculated using LOD = 3 × SD / slope. Important for knowing detection sensitivity of biosensor method.,1.0,D
+S057,1,"Advantages include: better sensitivity because of signal amplification, improved specificity through functionalization with antibodies, better stability than HRP, miniaturization possible, and lower cost. The nanomaterials act as catalytic centers.",1.5,C
+S057,2,Surface modification of AuNPs is achieved through thiol chemistry. Au-S bond is very strong. This allows stable attachment of biomolecules.,1.5,C
+S057,3,Size directly correlates with surface area. Smaller particles = higher surface area = more antibody immobilization = higher sensitivity.,1.0,D
+S057,4,Limit of Detection defined as minimum detectable concentration. Formula involves standard deviation and slope. The 3x factor is based on statistical consideration.,2.0,C
+S058,1,Colorimetric detection using TMB and nanomaterials is superior because the nanoparticles catalyze the reaction. The blue color is more visible and can be detected easier. Also the assay is faster.,1.0,D
+S058,2,"Strategies to enhance selectivity: use specific antibodies, employ blocking agents, use signal amplification, implement multiplexing, pre-treat samples, optimize conditions.",3.0,B
+S058,3,Surface chemistry impacts the ease of attaching biomolecules. Different functional groups suit different conjugation strategies. Stability under assay conditions is critical.,3.0,B
+S058,4,LOD tells us sensitivity of measurement method. Calculated as LOD = 3.3 × SD of blank / slope. Different for each instrument.,1.5,C
+S059,1,"Nanoparticles increase sensitivity through catalytic activity. They improve specificity by selective functionalization. The signal is amplified due to the high surface area. Advantages: enhanced sensitivity, improved specificity, stability, miniaturization, cost-effectiveness.",3.0,B
+S059,2,"Biofunctionalization steps: synthesis of AuNPs, surface modification with thiol groups, activation of thiol groups, coupling with biomolecules, purification, characterization, application.",1.5,C
+S059,3,"Selecting appropriate nanomaterial requires considering: the target molecule characteristics, antibody type being used, detection method chosen, desired sensitivity level.",1.0,D
+S059,4,LOD is minimum analyte concentration detectable. Using formula with standard deviation and slope. The value depends on noise and signal response.,1.0,D
+S060,1,The nanomaterials enhance the oxidation of TMB compared to HRP enzyme. Surface area is larger so more binding sites. Catalytic properties are better.,3.5,A
+S060,2,The binding specificity is enhanced by using well-chosen recognition elements like antibodies. Optimization of conditions also improves specificity. Cross-reactivity can be reduced.,3.5,A
+S060,3,"Nanomaterial properties: size (20-100nm optimal), shape (spherical preferred), surface chemistry (functionalized with thiol or amino groups), stability (in pH 4-8 range).",1.0,D
+S060,4,"Significance of LOD: it provides the detection limit, helps compare different biosensor methods, indicates measurement system capability.",1.5,C
+S061,1,"Signal amplification mechanisms: electrochemical amplification, colorimetric amplification where nanoparticles serve as catalytic centers, improved stability. This is better than traditional HRP-based biosensors.",1.0,D
+S061,2,AuNPs functionalized with antibodies can selectively bind antigens. The antigen-antibody interaction is specific. False positives are reduced through control experiments.,1.0,D
+S061,3,"For antibody-based biosensing: choose nanoparticles with high biocompatibility, suitable surface for antibody conjugation, stability in physiological conditions.",4.0,A
+S061,4,LOD very important. It tells lowest concentration can detect. Using standard deviation and slope of calibration for calculation.,2.0,C
+S062,1,Nanoparticles like gold have high surface area. They can immobilize many biomolecules. This increases detection sensitivity. TMB oxidation produces blue color which is easy to detect visually or with optical methods.,1.0,D
+S062,2,"Biofunctionalization through: attachment of biomolecules to AuNP surface, use of thiol chemistry for strong bonding, selection of specific recognition elements. Interference reduced by: blocking non-specific sites.",3.0,B
+S062,3,"Factors affecting performance: nanomaterial size, surface area available, charge on surface, chemical reactivity, resistance to degradation.",1.5,C
+S062,4,"LOD definition given, formula mentioned as LOD = 3 × SD / slope. Used for assessing analytical method sensitivity.",2.0,C
+S063,1,Nanomaterials are better because they have catalytic properties. The large surface area allows more immobilization of recognition elements. The color change is more intense.,3.5,A
+S063,2,"To achieve specificity: choose highly specific antibodies, use molecular imprinting, employ dual recognition with multiple elements, add blocking agents, use sample pre-treatment.",2.5,B
+S063,3,Quantum dots show excellent properties for biosensing due to tunable fluorescence. Carbon nanotubes offer versatile surface chemistry. Gold nanoparticles are stable and easy to functionalize.,1.5,C
+S063,4,The LOD is the minimum concentration that can be detected. It's calculated from blank sample variability and instrument response. Important for analytical method validation.,1.5,C
+S064,1,Enhanced sensitivity comes from the high surface area-to-volume ratio of nanoparticles. This allows immobilization of more enzyme molecules. Signal amplification is achieved through catalytic activity of the nanoparticles.,3.5,A
+S064,2,"AuNP biofunctionalization achieved by thiolation followed by antibody conjugation. Specificity from antigen-antibody recognition. Strategies: blocking, washing, signal amplification.",3.0,B
+S064,3,"Key considerations: size (determines surface area and sensitivity), material composition (affects optical/electrical properties), surface modification ease, cost and availability.",3.0,B
+S064,4,LOD = 3 × standard deviation of lowest concentration / slope of calibration line. This gives the detection limit of the method.,3.0,B
+S065,1,TMB and nanomaterials combination works well. The nanoparticles catalyze the oxidation reaction. This produces a strong blue color that can be detected easily even at low concentrations of analyte.,1.5,C
+S065,2,Biofunctionalization process involves modifying gold surface with biologically active molecules. These bind target molecules selectively. Interference minimized through experimental design.,4.0,A
+S065,3,"Selection criteria: compatibility with antibodies, ability to amplify signal, stability in storage and assay, biocompatibility for biological systems.",2.5,B
+S065,4,Definition: lowest detectable concentration. Calculation: standard deviation approach. Significance: measures method sensitivity and detection capability.,3.0,B
+S066,1,The advantages of nanomaterial-based TMB biosensors: 1) Enhanced sensitivity 2) Improved specificity 3) Stability 4) Lower cost 5) Miniaturization 6) Portability. The mechanisms involve surface area and catalytic properties.,1.5,C
+S066,2,"Specific binding achieved through: complementary interaction between functionalized AuNPs and target, optimized conditions, and proper blocking of unreactive sites.",1.0,D
+S066,3,"Physicochemical properties include: size (affects sensitivity), surface area (affects binding capacity), shape (affects field distribution), electrical properties (for conductivity-based detection).",1.0,D
+S066,4,LOD is lowest amount detectible.,3.0,B
+S067,1,Nanomaterials provide more surface area compared to traditional methods. This means more antibodies can bind. The specificity is high because functionalization with specific ligands. The signal is stronger because nanoparticles amplify it.,2.0,C
+S067,2,AuNPs functionalized with antibodies provide specific binding. The high affinity and selectivity of antibodies ensure specificity. Interference from non-target molecules is minimized.,2.5,B
+S067,3,Size matters. Smaller is better for sensitivity. That's the main factor.,2.5,B
+S067,4,LOD = 3 times SD divided by slope. It's the detection limit.,3.0,B
+S068,1,Colorimetric biosensors using nanomaterials for TMB oxidation enhance sensitivity by providing more binding sites and improving catalytic activity. Specificity is improved by functionalizing nanoparticles with specific recognition elements like antibodies.,4.0,A
+S068,2,Simple answer. AuNPs bind to targets through antibodies. This is specific.,3.5,A
+S068,3,Surface chemistry affects how antibodies attach. Stability is important. Size affects sensitivity.,1.0,D
+S068,4,Limit of Detection is minimum concentration. Formula uses SD and slope. Important for biosensor sensitivity.,1.0,D
+S069,1,Short answer but not complete understanding shown. TMB is oxidized faster by nanomaterials.,1.0,D
+S069,2,Biofunctionalization means attaching antibodies to gold. The antibodies bind target molecules specifically.,2.5,B
+S069,3,"Nanomaterial properties important for performance: size, shape, surface chemistry. These affect how well antibodies bind and detect targets.",3.5,A
+S069,4,LOD definition: minimum detectable concentration. Formula: LOD = 3 × SD / slope of calibration.,2.0,C
+S070,1,Nanomaterials work better. The reason is the high surface area. More enzyme can be attached. Better sensitivity.,4.0,A
+S070,2,AuNPs are modified with thiol groups then antibodies. This gives specificity through antibody-antigen binding.,4.0,A
+S070,3,"Criteria for selection: size and shape, surface chemical groups, stability in physiological conditions, optical or electrical properties for detection.",1.0,D
+S070,4,"Significance of LOD: tells you detection limits, helps validate methods, compares sensors.",1.5,C
+S071,1,The nanoparticles catalyze TMB oxidation producing blue color. This is detected easily. The system is more sensitive and specific than HRP.,1.5,C
+S071,2,"Achieving specificity: use antibodies for recognition, block non-specific sites, use controls, optimize pH and conditions.",1.5,C
+S071,3,Biocompatibility important to avoid toxicity. Surface area determines antibody loading. Stability ensures consistent results.,3.0,B
+S071,4,"LOD is the limit of detection, the minimum concentration of analyte that can be reliably detected but not quantified. Calculated as LOD = 3 × (standard deviation of blank) / slope of calibration curve. It's significant because it tells us the sensitivity of the method.",3.0,B
+S072,1,"Sensitivity enhanced through: signal amplification from catalytic properties. Specificity improved through: selective functionalization. Advantages: faster response, broader range, reduced interference.",1.5,C
+S072,2,Biofunctionalization through thiol chemistry. Specificity through selective antibody binding. Interference reduced by blocking and washing.,2.5,B
+S072,3,Size and surface area of nanomaterials directly affect sensitivity. Smaller particles have larger surface area for antibody immobilization. Shape also affects orientation of antibodies.,1.5,C
+S072,4,Limit of Detection is the lowest concentration detectable. Formula: LOD = 3.3 × SD of blank / slope. This is important for knowing the detection capability of the biosensor.,2.0,C
+S073,1,Gold nanoparticles and graphene oxide can enhance the sensitivity of TMB-based colorimetric biosensors. The catalytic activity is increased. The color change is more intense and easily detectable.,2.5,B
+S073,2,Biofunctionalization of AuNPs involves modifying the surface with biomolecules. This is done through thiol chemistry where thiolated molecules bind to gold surface. The specificity comes from antibody-antigen interactions.,1.5,C
+S073,3,"Physicochemical properties like size, surface chemistry, stability affect performance. Smaller nanoparticles provide higher surface area for antibody attachment. This improves sensitivity.",4.0,A
+S073,4,LOD represents the lowest analyte concentration that can be reliably detected. Calculated using the formula LOD = 3 × SD of lowest concentration / slope of calibration line. Determines the sensitivity limit.,1.0,D
+S074,1,Nanomaterials like gold nanoparticles have high surface area which allows more enzyme molecules to be immobilized. This increases sensitivity. Also the catalytic activity is enhanced leading to faster oxidation of TMB.,2.5,B
+S074,2,AuNPs are functionalized by attaching antibodies to their surface. This allows them to bind specific target molecules. Interference is reduced by blocking non-specific binding sites.,4.0,A
+S074,3,"Selection criteria: size (affects sensitivity), surface chemistry (affects conjugation), stability (affects reliability), biocompatibility (affects safety), cost (practical consideration).",4.0,A
+S074,4,"LOD is important parameter in analytical chemistry. It's the minimum concentration detectable. Using n=20 replicates of blank, we calculate mean and standard deviation, then LOD = mean + 2SD.",1.0,D
+S075,1,TMB gets oxidized to blue color. Nanomaterials make this reaction faster and produce more intense color. This is better than HRP because nanoparticles are more stable.,1.0,D
+S075,2,Gold nanoparticles can be biofunctionalized through various methods. Thiol groups bind strongly to gold. Antibodies are attached for specific binding.,3.5,A
+S075,3,Size of nanomaterials affects sensitivity. Smaller size means larger surface area-to-volume ratio. This allows more antibodies to attach. Surface chemistry determines ease of functionalization.,3.0,B
+S075,4,The Limit of Detection is defined as the minimum concentration that can be distinguished with 99% fidelity. Formula: LOD = 3E/S where E is standard deviation and S is slope.,1.0,D
+S076,1,Colorimetric biosensors using nanoparticles for TMB oxidation work because nanoparticles have large surface area and can catalyze the reaction better. The signal amplification is achieved through multiple mechanisms.,1.0,D
+S076,2,"Biofunctionalization: Start with AuNPs, modify surface with thiol-containing molecules, attach recognition elements like antibodies, characterize the conjugate. Specificity achieved through selective antibodies.",4.0,A
+S076,3,"Properties affecting performance: size, shape, surface charge, stability, optical properties, conductivity. Smaller nanomaterials have larger surface area. Different materials suit different applications.",4.0,A
+S076,4,LOD = 3.3 × (standard deviation of blank measured) / (slope of calibration line). It represents the lowest measurable concentration. Used to determine biosensor sensitivity.,1.5,C
+S077,1,"Nanomaterials enhance sensitivity by providing more sites for antibody attachment. Specificity is improved because the nanoparticles can be functionalized with specific ligands. The advantages are: enhanced sensitivity, improved specificity, faster response time, broader dynamic range, reduced interference, and cost effectiveness.",1.5,C
+S077,2,"The biofunctionalization process involves: 1) Surface modification with thiol groups 2) Attachment of biomolecules like antibodies 3) Verification of binding. Strategies to reduce interference: use blocking agents, selective detection methods, control experiments.",2.5,B
+S077,3,"For cancer biomarker detection, spherical AuNPs with 20-30nm size are suitable. Surface functionalized with thiol groups for antibody attachment. Known stability under physiological conditions.",2.5,B
+S077,4,LOD (Limit of Detection) is calculated based on standard deviation of the response and slope of calibration curve. LOD = 3 × SD of lowest concentration / slope. Used to evaluate detection capability.,3.0,B
+S078,1,Signal amplification in nanomaterial-based systems occurs because the high surface area to volume ratio allows for efficient immobilization of biomolecules. The colorimetric signal from TMB oxidation is more intense with nanoparticles.,1.5,C
+S078,2,AuNPs are functionalized by conjugating anti-neuraminidase antibodies to thiolated AuNPs. This provides high specificity due to antigen-antibody interaction. The sensor can detect target viruses specifically.,4.0,A
+S078,3,"Nanomaterial selection: consider target analyte (DNA, protein, small molecule), antibody compatibility, desired detection method (optical, electrochemical), signal amplification needs.",2.5,B
+S078,4,"Definition: LOD is the minimum concentration reliably detected. Calculation: measure blanks (n≥20), calculate SD, apply formula LOD = 3×SD/slope. Significance: determines analytical sensitivity.",1.0,D
+S079,1,TMB is oxidized by nanomaterials faster than by HRP. The blue color produced is more intense. This makes detection easier.,1.5,C
+S079,2,Achieving specificity involves using specific recognition elements like antibodies. These are highly selective for target molecules. Interference is minimized through blocking agents and washing steps.,2.5,B
+S079,3,"The criteria include: size and surface area (larger area for immobilization), shape (affects binding geometry), surface chemistry (ease of conjugation), biocompatibility (no cell toxicity).",1.0,D
+S079,4,The LOD determines the lowest analyte concentration that can be reliably detected but not quantified precisely. Formula uses statistical approach with 3x or 3.3x factor.,3.0,B
+S080,1,"The mechanisms involve enhanced surface area, signal amplification, improved stability, reduced non-specific interactions and tunable properties. Nanoparticles like AuNPs and graphene oxide can significantly enhance the colorimetric signal.",2.0,C
+S080,2,Biofunctionalization makes AuNPs into biosensors. The surface is modified to bind target molecules specifically. Cross-reactivity is avoided through careful choice of recognition elements.,4.0,A
+S080,3,"Physicochemical properties: size affects sensitivity, surface chemistry affects specificity, stability ensures reliability, optical properties enable detection.",4.0,A
+S080,4,LOD is a statistical measure. Formula: LOD = 3 × (standard deviation of baseline) / (slope of calibration line). Shows lowest detectable concentration.,3.0,B
+S081,1,Nanomaterials provide high surface area for enzyme immobilization. This increases the number of enzyme molecules available for the reaction. More enzymes means more TMB oxidation and stronger color signal.,2.0,C
+S081,2,"AuNPs can be functionalized with antibodies, DNA, or other biomolecules. This confers selectivity. Specificity depends on the binding affinity of the recognition element chosen.",2.5,B
+S081,3,"Most important criteria: biocompatibility, size and surface area, stability, optical properties. Example: Quantum dots with tunable fluorescence for sensitive detection.",3.5,A
+S081,4,LOD definition is given. Calculated using LOD = 3 × SD / slope. Important for knowing detection sensitivity of biosensor method.,3.0,B
+S082,1,"Advantages include: better sensitivity because of signal amplification, improved specificity through functionalization with antibodies, better stability than HRP, miniaturization possible, and lower cost. The nanomaterials act as catalytic centers.",1.5,C
+S082,2,Surface modification of AuNPs is achieved through thiol chemistry. Au-S bond is very strong. This allows stable attachment of biomolecules.,1.5,C
+S082,3,Size directly correlates with surface area. Smaller particles = higher surface area = more antibody immobilization = higher sensitivity.,2.0,C
+S082,4,Limit of Detection defined as minimum detectable concentration. Formula involves standard deviation and slope. The 3x factor is based on statistical consideration.,1.5,C
+S083,1,Colorimetric detection using TMB and nanomaterials is superior because the nanoparticles catalyze the reaction. The blue color is more visible and can be detected easier. Also the assay is faster.,1.0,D
+S083,2,"Strategies to enhance selectivity: use specific antibodies, employ blocking agents, use signal amplification, implement multiplexing, pre-treat samples, optimize conditions.",3.0,B
+S083,3,Surface chemistry impacts the ease of attaching biomolecules. Different functional groups suit different conjugation strategies. Stability under assay conditions is critical.,3.5,A
+S083,4,LOD tells us sensitivity of measurement method. Calculated as LOD = 3.3 × SD of blank / slope. Different for each instrument.,1.0,D
+S084,1,"Nanoparticles increase sensitivity through catalytic activity. They improve specificity by selective functionalization. The signal is amplified due to the high surface area. Advantages: enhanced sensitivity, improved specificity, stability, miniaturization, cost-effectiveness.",3.5,A
+S084,2,"Biofunctionalization steps: synthesis of AuNPs, surface modification with thiol groups, activation of thiol groups, coupling with biomolecules, purification, characterization, application.",2.0,C
+S084,3,"Selecting appropriate nanomaterial requires considering: the target molecule characteristics, antibody type being used, detection method chosen, desired sensitivity level.",1.0,D
+S084,4,LOD is minimum analyte concentration detectable. Using formula with standard deviation and slope. The value depends on noise and signal response.,1.0,D
+S085,1,The nanomaterials enhance the oxidation of TMB compared to HRP enzyme. Surface area is larger so more binding sites. Catalytic properties are better.,3.0,B
+S085,2,The binding specificity is enhanced by using well-chosen recognition elements like antibodies. Optimization of conditions also improves specificity. Cross-reactivity can be reduced.,2.5,B
+S085,3,"Nanomaterial properties: size (20-100nm optimal), shape (spherical preferred), surface chemistry (functionalized with thiol or amino groups), stability (in pH 4-8 range).",3.0,B
+S085,4,"Significance of LOD: it provides the detection limit, helps compare different biosensor methods, indicates measurement system capability.",1.5,C
+S086,1,"Signal amplification mechanisms: electrochemical amplification, colorimetric amplification where nanoparticles serve as catalytic centers, improved stability. This is better than traditional HRP-based biosensors.",1.0,D
+S086,2,AuNPs functionalized with antibodies can selectively bind antigens. The antigen-antibody interaction is specific. False positives are reduced through control experiments.,3.0,B
+S086,3,"For antibody-based biosensing: choose nanoparticles with high biocompatibility, suitable surface for antibody conjugation, stability in physiological conditions.",1.0,D
+S086,4,LOD very important. It tells lowest concentration can detect. Using standard deviation and slope of calibration for calculation.,1.5,C
+S087,1,Nanoparticles like gold have high surface area. They can immobilize many biomolecules. This increases detection sensitivity. TMB oxidation produces blue color which is easy to detect visually or with optical methods.,1.0,D
+S087,2,"Biofunctionalization through: attachment of biomolecules to AuNP surface, use of thiol chemistry for strong bonding, selection of specific recognition elements. Interference reduced by: blocking non-specific sites.",3.0,B
+S087,3,"Factors affecting performance: nanomaterial size, surface area available, charge on surface, chemical reactivity, resistance to degradation.",1.0,D
+S087,4,"LOD definition given, formula mentioned as LOD = 3 × SD / slope. Used for assessing analytical method sensitivity.",1.5,C
+S088,1,Nanomaterials are better because they have catalytic properties. The large surface area allows more immobilization of recognition elements. The color change is more intense.,2.5,B
+S088,2,"To achieve specificity: choose highly specific antibodies, use molecular imprinting, employ dual recognition with multiple elements, add blocking agents, use sample pre-treatment.",1.0,D
+S088,3,Quantum dots show excellent properties for biosensing due to tunable fluorescence. Carbon nanotubes offer versatile surface chemistry. Gold nanoparticles are stable and easy to functionalize.,3.0,B
+S088,4,The LOD is the minimum concentration that can be detected. It's calculated from blank sample variability and instrument response. Important for analytical method validation.,1.5,C
+S089,1,Enhanced sensitivity comes from the high surface area-to-volume ratio of nanoparticles. This allows immobilization of more enzyme molecules. Signal amplification is achieved through catalytic activity of the nanoparticles.,3.0,B
+S089,2,"AuNP biofunctionalization achieved by thiolation followed by antibody conjugation. Specificity from antigen-antibody recognition. Strategies: blocking, washing, signal amplification.",3.0,B
+S089,3,"Key considerations: size (determines surface area and sensitivity), material composition (affects optical/electrical properties), surface modification ease, cost and availability.",1.0,D
+S089,4,LOD = 3 × standard deviation of lowest concentration / slope of calibration line. This gives the detection limit of the method.,1.0,D
+S090,1,TMB and nanomaterials combination works well. The nanoparticles catalyze the oxidation reaction. This produces a strong blue color that can be detected easily even at low concentrations of analyte.,2.5,B
+S090,2,Biofunctionalization process involves modifying gold surface with biologically active molecules. These bind target molecules selectively. Interference minimized through experimental design.,3.5,A
+S090,3,"Selection criteria: compatibility with antibodies, ability to amplify signal, stability in storage and assay, biocompatibility for biological systems.",3.0,B
+S090,4,Definition: lowest detectable concentration. Calculation: standard deviation approach. Significance: measures method sensitivity and detection capability.,2.0,C
+S091,1,The advantages of nanomaterial-based TMB biosensors: 1) Enhanced sensitivity 2) Improved specificity 3) Stability 4) Lower cost 5) Miniaturization 6) Portability. The mechanisms involve surface area and catalytic properties.,2.0,C
+S091,2,"Specific binding achieved through: complementary interaction between functionalized AuNPs and target, optimized conditions, and proper blocking of unreactive sites.",1.5,C
+S091,3,"Physicochemical properties include: size (affects sensitivity), surface area (affects binding capacity), shape (affects field distribution), electrical properties (for conductivity-based detection).",3.5,A
+S091,4,LOD is lowest amount detectible.,2.0,C
+S092,1,Nanomaterials provide more surface area compared to traditional methods. This means more antibodies can bind. The specificity is high because functionalization with specific ligands. The signal is stronger because nanoparticles amplify it.,1.5,C
+S092,2,AuNPs functionalized with antibodies provide specific binding. The high affinity and selectivity of antibodies ensure specificity. Interference from non-target molecules is minimized.,2.0,C
+S092,3,Size matters. Smaller is better for sensitivity. That's the main factor.,2.5,B
+S092,4,LOD = 3 times SD divided by slope. It's the detection limit.,1.5,C
+S093,1,Colorimetric biosensors using nanomaterials for TMB oxidation enhance sensitivity by providing more binding sites and improving catalytic activity. Specificity is improved by functionalizing nanoparticles with specific recognition elements like antibodies.,3.5,A
+S093,2,Simple answer. AuNPs bind to targets through antibodies. This is specific.,3.5,A
+S093,3,Surface chemistry affects how antibodies attach. Stability is important. Size affects sensitivity.,2.0,C
+S093,4,Limit of Detection is minimum concentration. Formula uses SD and slope. Important for biosensor sensitivity.,3.0,B
+S094,1,Short answer but not complete understanding shown. TMB is oxidized faster by nanomaterials.,2.0,C
+S094,2,Biofunctionalization means attaching antibodies to gold. The antibodies bind target molecules specifically.,4.0,A
+S094,3,"Nanomaterial properties important for performance: size, shape, surface chemistry. These affect how well antibodies bind and detect targets.",1.0,D
+S094,4,LOD definition: minimum detectable concentration. Formula: LOD = 3 × SD / slope of calibration.,1.0,D
+S095,1,Nanomaterials work better. The reason is the high surface area. More enzyme can be attached. Better sensitivity.,2.5,B
+S095,2,AuNPs are modified with thiol groups then antibodies. This gives specificity through antibody-antigen binding.,3.0,B
+S095,3,"Criteria for selection: size and shape, surface chemical groups, stability in physiological conditions, optical or electrical properties for detection.",3.0,B
+S095,4,"Significance of LOD: tells you detection limits, helps validate methods, compares sensors.",1.0,D
+S096,1,The nanoparticles catalyze TMB oxidation producing blue color. This is detected easily. The system is more sensitive and specific than HRP.,1.0,D
+S096,2,"Achieving specificity: use antibodies for recognition, block non-specific sites, use controls, optimize pH and conditions.",3.0,B
+S096,3,Biocompatibility important to avoid toxicity. Surface area determines antibody loading. Stability ensures consistent results.,1.5,C
+S096,4,"LOD is the limit of detection, the minimum concentration of analyte that can be reliably detected but not quantified. Calculated as LOD = 3 × (standard deviation of blank) / slope of calibration curve. It's significant because it tells us the sensitivity of the method.",2.0,C
+S097,1,"Sensitivity enhanced through: signal amplification from catalytic properties. Specificity improved through: selective functionalization. Advantages: faster response, broader range, reduced interference.",1.5,C
+S097,2,Biofunctionalization through thiol chemistry. Specificity through selective antibody binding. Interference reduced by blocking and washing.,2.0,C
+S097,3,Size and surface area of nanomaterials directly affect sensitivity. Smaller particles have larger surface area for antibody immobilization. Shape also affects orientation of antibodies.,1.0,D
+S097,4,Limit of Detection is the lowest concentration detectable. Formula: LOD = 3.3 × SD of blank / slope. This is important for knowing the detection capability of the biosensor.,1.5,C
+S098,1,Gold nanoparticles and graphene oxide can enhance the sensitivity of TMB-based colorimetric biosensors. The catalytic activity is increased. The color change is more intense and easily detectable.,2.0,C
+S098,2,Biofunctionalization of AuNPs involves modifying the surface with biomolecules. This is done through thiol chemistry where thiolated molecules bind to gold surface. The specificity comes from antibody-antigen interactions.,2.0,C
+S098,3,"Physicochemical properties like size, surface chemistry, stability affect performance. Smaller nanoparticles provide higher surface area for antibody attachment. This improves sensitivity.",1.5,C
+S098,4,LOD represents the lowest analyte concentration that can be reliably detected. Calculated using the formula LOD = 3 × SD of lowest concentration / slope of calibration line. Determines the sensitivity limit.,3.0,B
+S099,1,Nanomaterials like gold nanoparticles have high surface area which allows more enzyme molecules to be immobilized. This increases sensitivity. Also the catalytic activity is enhanced leading to faster oxidation of TMB.,4.0,A
+S099,2,AuNPs are functionalized by attaching antibodies to their surface. This allows them to bind specific target molecules. Interference is reduced by blocking non-specific binding sites.,3.0,B
+S099,3,"Selection criteria: size (affects sensitivity), surface chemistry (affects conjugation), stability (affects reliability), biocompatibility (affects safety), cost (practical consideration).",3.5,A
+S099,4,"LOD is important parameter in analytical chemistry. It's the minimum concentration detectable. Using n=20 replicates of blank, we calculate mean and standard deviation, then LOD = mean + 2SD.",2.0,C
+S100,1,TMB gets oxidized to blue color. Nanomaterials make this reaction faster and produce more intense color. This is better than HRP because nanoparticles are more stable.,3.0,B
+S100,2,Gold nanoparticles can be biofunctionalized through various methods. Thiol groups bind strongly to gold. Antibodies are attached for specific binding.,4.0,A
+S100,3,Size of nanomaterials affects sensitivity. Smaller size means larger surface area-to-volume ratio. This allows more antibodies to attach. Surface chemistry determines ease of functionalization.,3.5,A
+S100,4,The Limit of Detection is defined as the minimum concentration that can be distinguished with 99% fidelity. Formula: LOD = 3E/S where E is standard deviation and S is slope.,1.0,D

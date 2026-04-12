@@ -1,0 +1,24 @@
+Creative Commons Attribution 4.0 International (CC-BY-4.0)
+
+Data License: The datasets in this repository are licensed under the Creative 
+Commons Attribution 4.0 International License.
+
+You are free to:
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material for any purpose, 
+  even commercially.
+
+Under the following terms:
+- Attribution — You must give appropriate credit, provide a link to the 
+  license, and indicate if changes were made.
+
+For full terms, see: https://creativecommons.org/licenses/by/4.0/
+
+---
+
+Data Notes:
+- exam_results_cleaned_final.csv: 122 exam answers with marks (anonymized)
+- synthetic_exam_data_categorical.csv: 400 synthetically generated answers
+- All identifying information (student names, instructor names) has been removed
+- Data is from educational assessment (BCE404 course)
+- No personal data is included
