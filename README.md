@@ -94,6 +94,19 @@ Mark distribution:
 4.0: 17 answers    (14%)
 ```
 
+## Exam Questions
+
+The dataset contains student answers to 4 exam questions from BCE404 Biosensor course:
+
+| Question | Topic | Avg Mark | Sample Size |
+|----------|-------|----------|-------------|
+| Q1 | Colorimetric biosensors using nanomaterials | 3.00 | 29 |
+| Q2 | Biofunctionalization of gold nanoparticles | 2.36 | 35 |
+| Q3 | Physicochemical properties of nanomaterials | 2.07 | 30 |
+| Q4 | Limit of Detection (LOD) definition | 1.38 | 28 |
+
+**Key observation:** Question 4 receives significantly lower marks (1.6 points lower than Q1) across all students, suggesting either higher difficulty or stricter grading standards applied to that question.
+
 ## Results
 
 ### Model Performance
