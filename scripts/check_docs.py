@@ -114,21 +114,59 @@ def build_checks(res):
 
 
 # Fields that legitimately differ between two runs of the same code: the date
-# it ran and the library versions it ran under. Everything else is a number the
-# repository reports, and a change in one is a change in the findings.
+# it ran and the library versions it ran under.
 VOLATILE = ("generated", "config")
+
+# Accuracies are reported to three decimals throughout the repository, so two
+# runs agree when they round to the same reported value. Demanding exact float
+# equality would compare the BLAS build and the CPU, which is a property of the
+# machine and not of these findings. Counts stay exact: a confusion matrix cell
+# moving by one answer is a real change.
+FLOAT_TOLERANCE = 5e-4
 
 
 def numbers_only(res):
     return {k: v for k, v in res.items() if k not in VOLATILE}
 
 
+def differences(committed, fresh, path=""):
+    """Every place two result trees disagree, as readable paths."""
+    out = []
+    if isinstance(committed, dict) and isinstance(fresh, dict):
+        for key in sorted(set(committed) | set(fresh)):
+            where = "{0}.{1}".format(path, key) if path else str(key)
+            if key not in committed or key not in fresh:
+                out.append((where, committed.get(key, "<absent>"),
+                            fresh.get(key, "<absent>")))
+                continue
+            out += differences(committed[key], fresh[key], where)
+    elif isinstance(committed, list) and isinstance(fresh, list):
+        if len(committed) != len(fresh):
+            out.append((path, "{0} items".format(len(committed)),
+                        "{0} items".format(len(fresh))))
+        else:
+            for i, (c, f) in enumerate(zip(committed, fresh)):
+                out += differences(c, f, "{0}[{1}]".format(path, i))
+    elif isinstance(committed, bool) or isinstance(fresh, bool):
+        if committed != fresh:
+            out.append((path, committed, fresh))
+    elif isinstance(committed, float) or isinstance(fresh, float):
+        if abs(float(committed) - float(fresh)) > FLOAT_TOLERANCE:
+            out.append((path, committed, fresh))
+    elif committed != fresh:
+        out.append((path, committed, fresh))
+    return out
+
+
 def compare_to_fresh_run():
-    """Recompute the metrics and diff the numbers against the committed file.
+    """Recompute the results and diff them against the committed files.
 
     Used in CI. The committed results/metrics.json is the version every table
     in the markdown was copied from, so if a fresh run disagrees with it, the
     repository is reporting numbers its own code no longer produces.
+
+    Floats are compared at the precision the repository reports. See
+    FLOAT_TOLERANCE.
     """
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from evaluate import evaluate  # noqa: E402
@@ -139,19 +177,24 @@ def compare_to_fresh_run():
     from grading.models import RANDOM_STATE  # noqa: E402
 
     df = load_dataset()
-    failures = []
+    failed = False
     for path, fresh in (
         (METRICS, evaluate(df, RANDOM_STATE)),
         (EXPLORATION, explore(df, RANDOM_STATE)),
     ):
         committed = json.loads(path.read_text(encoding="utf-8"))
-        if numbers_only(committed) != numbers_only(fresh):
-            failures.append(path.name)
+        diffs = differences(numbers_only(committed), numbers_only(fresh))
+        if diffs:
+            failed = True
+            print("\n{0}: {1} value(s) differ beyond {2} in a fresh run".format(
+                path.name, len(diffs), FLOAT_TOLERANCE))
+            for where, was, now in diffs[:20]:
+                print("  {0:<52} committed {1}  fresh {2}".format(where, was, now))
+            if len(diffs) > 20:
+                print("  ... and {0} more".format(len(diffs) - 20))
 
-    if failures:
-        print("a fresh run disagrees with the committed results: {0}".format(
-            ", ".join(failures)))
-        print("regenerate with scripts/evaluate.py and scripts/explore.py, "
+    if failed:
+        print("\nregenerate with scripts/evaluate.py and scripts/explore.py, "
               "update the markdown, and commit.")
         return 1
     print("committed results match a fresh run")

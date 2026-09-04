@@ -158,16 +158,21 @@ python scripts/check_docs.py --check-results  # verify the markdown, and the res
 `scripts/evaluate.py` is the single source of every accuracy quoted in this
 repository, and `scripts/explore.py` is the single source of every descriptive
 table in `FINDINGS.md`. The tables in the markdown are copied from those two,
-and `check_docs.py` verifies all 62 of them, then recomputes the results and
-confirms the committed files still match a fresh run. CI runs the same chain on
-every push, on Python 3.10 and 3.12.
+and `check_docs.py` verifies all 62 of them. Passing `--check-results` also
+recomputes everything and confirms the committed files still match a fresh run,
+comparing accuracies at the three decimals this repository reports. CI runs the
+whole chain on every push, on Python 3.10 and 3.12.
 
 The leakage guarantee is tested, not only asserted. `tests/test_leakage.py`
 fails if the length thresholds stop being learned per fold, or if a sentinel
 token planted in the held-out rows reaches the fitted vocabulary.
 
-Rerunning with the default seed reproduces every number exactly. No API keys, no
-credentials, no GPU.
+Rerunning with the default seed reproduces every reported number. Accuracies
+agree to the three decimals quoted here. Exact agreement in the last bits of a
+float depends on the BLAS build and the CPU, so it is not claimed. The library
+versions each committed run used are recorded in `results/metrics.json`.
+
+No API keys, no credentials, no GPU.
 
 ## The LLM fine-tuning attempts
 

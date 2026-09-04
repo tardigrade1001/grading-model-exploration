@@ -76,7 +76,8 @@ def test_per_question_majority_beats_the_global_majority_on_this_data():
 @pytest.mark.skipif(not METRICS.exists(), reason="run scripts/evaluate.py first")
 class TestReportedMetrics:
     @pytest.fixture(scope="class")
-    def res(self):
+    @classmethod
+    def res(cls):
         return json.loads(METRICS.read_text(encoding="utf-8"))
 
     def test_every_model_records_the_fields_the_docs_cite(self, res):

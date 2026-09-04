@@ -22,6 +22,20 @@ question identity confounds all four of the raw patterns. FINDINGS.md carries
 the interpretation.
 """
 
+import os
+
+# Single-threaded BLAS before numpy loads. Threaded reductions sum in whatever
+# order the threads finish, so the lbfgs solver in LogisticRegression lands on a
+# slightly different optimum each run. Pinning one thread makes every reported
+# number reproduce exactly on one machine.
+#
+# Across operating systems and library versions the last few decimals still
+# move. scripts/check_docs.py compares within a tolerance for that, and every
+# value is quoted to three decimals, well above the drift.
+for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+           "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
+    os.environ.setdefault(_v, "1")
+
 import argparse
 import json
 import sys
