@@ -1,0 +1,56 @@
+name: CI
+
+# The repository claims its results are reproducible and its documented numbers
+# match its generated output. This workflow is what enforces both. A change to
+# the data, the seed, a model definition or a markdown table fails here.
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Tests
+        run: pytest
+
+      # Verifies the markdown against results/, and results/ against a fresh run.
+      - name: Check the write-up against the numbers
+        run: python scripts/check_docs.py --check-results
+
+      - name: Regenerate everything
+        run: |
+          python scripts/evaluate.py
+          python scripts/explore.py
+
+      - name: Figures
+        run: python scripts/make_figures.py
+
+      - name: Upload the regenerated outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-py${{ matrix.python-version }}
+          path: |
+            results/
+            figures/
