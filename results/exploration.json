@@ -1,0 +1,275 @@
+{
+  "generated": "2026-09-04",
+  "seed": 0,
+  "n_total": 122,
+  "n_train": 97,
+  "n_holdout": 25,
+  "class_order": [
+    "Low",
+    "Mid",
+    "High"
+  ],
+  "concept_names": [
+    "antibody",
+    "specificity",
+    "sensitivity",
+    "nanomaterial",
+    "tmb",
+    "binding",
+    "target",
+    "lod",
+    "calibration"
+  ],
+  "pooled_length_mark_pearson_r": 0.6226714955868332,
+  "by_question": {
+    "1": {
+      "n": 21,
+      "mean_mark": 3.0714285714285716,
+      "std_mark": 0.870139561876632,
+      "mean_chars": 784.1428571428571,
+      "class_counts": {
+        "Low": 1,
+        "Mid": 7,
+        "High": 13
+      },
+      "pearson_r": 0.3603943031368772,
+      "spearman_r": 0.4115763310109714,
+      "concepts": {
+        "antibody": 0.3333333333333333,
+        "specificity": 0.9047619047619048,
+        "sensitivity": 0.8095238095238095,
+        "nanomaterial": 0.8571428571428571,
+        "tmb": 0.9523809523809523,
+        "binding": 0.38095238095238093,
+        "target": 0.5714285714285714,
+        "lod": 0.19047619047619047,
+        "calibration": 0.09523809523809523
+      }
+    },
+    "2": {
+      "n": 30,
+      "mean_mark": 2.433333333333333,
+      "std_mark": 1.0148325268098497,
+      "mean_chars": 770.4333333333333,
+      "class_counts": {
+        "Low": 5,
+        "Mid": 15,
+        "High": 10
+      },
+      "pearson_r": 0.5919176335539108,
+      "spearman_r": 0.5380121759701781,
+      "concepts": {
+        "antibody": 0.6,
+        "specificity": 0.7666666666666667,
+        "sensitivity": 0.23333333333333334,
+        "nanomaterial": 0.7,
+        "tmb": 0.03333333333333333,
+        "binding": 0.8,
+        "target": 0.8333333333333334,
+        "lod": 0.03333333333333333,
+        "calibration": 0.06666666666666667
+      }
+    },
+    "3": {
+      "n": 22,
+      "mean_mark": 2.090909090909091,
+      "std_mark": 0.7177405625652734,
+      "mean_chars": 769.7727272727273,
+      "class_counts": {
+        "Low": 5,
+        "Mid": 13,
+        "High": 4
+      },
+      "pearson_r": 0.5221825408903759,
+      "spearman_r": 0.527239033274132,
+      "concepts": {
+        "antibody": 0.7272727272727273,
+        "specificity": 0.36363636363636365,
+        "sensitivity": 0.6818181818181818,
+        "nanomaterial": 0.9545454545454546,
+        "tmb": 0.0,
+        "binding": 0.45454545454545453,
+        "target": 0.7272727272727273,
+        "lod": 0.045454545454545456,
+        "calibration": 0.09090909090909091
+      }
+    },
+    "4": {
+      "n": 24,
+      "mean_mark": 1.375,
+      "std_mark": 0.44842720314644063,
+      "mean_chars": 321.9583333333333,
+      "class_counts": {
+        "Low": 22,
+        "Mid": 1,
+        "High": 1
+      },
+      "pearson_r": 0.6542896918144926,
+      "spearman_r": 0.6217990926470618,
+      "concepts": {
+        "antibody": 0.0,
+        "specificity": 0.0,
+        "sensitivity": 0.0,
+        "nanomaterial": 0.0,
+        "tmb": 0.0,
+        "binding": 0.0,
+        "target": 0.041666666666666664,
+        "lod": 1.0,
+        "calibration": 0.875
+      }
+    }
+  },
+  "length_by_mark": {
+    "1.0": {
+      "n": 17,
+      "mean_chars": 387.6470588235294
+    },
+    "1.5": {
+      "n": 16,
+      "mean_chars": 381.25
+    },
+    "2.0": {
+      "n": 30,
+      "mean_chars": 674.2333333333333
+    },
+    "2.5": {
+      "n": 6,
+      "mean_chars": 707.0
+    },
+    "3.0": {
+      "n": 11,
+      "mean_chars": 935.1818181818181
+    },
+    "3.5": {
+      "n": 1,
+      "mean_chars": 780.0
+    },
+    "4.0": {
+      "n": 16,
+      "mean_chars": 1001.0
+    }
+  },
+  "concepts_by_class": {
+    "Low": {
+      "antibody": 0.15151515151515152,
+      "specificity": 0.15151515151515152,
+      "sensitivity": 0.12121212121212122,
+      "nanomaterial": 0.21212121212121213,
+      "tmb": 0.0,
+      "binding": 0.18181818181818182,
+      "target": 0.2727272727272727,
+      "lod": 0.7575757575757576,
+      "calibration": 0.696969696969697
+    },
+    "Mid": {
+      "antibody": 0.5,
+      "specificity": 0.5277777777777778,
+      "sensitivity": 0.4444444444444444,
+      "nanomaterial": 0.8611111111111112,
+      "tmb": 0.19444444444444445,
+      "binding": 0.5555555555555556,
+      "target": 0.6388888888888888,
+      "lod": 0.08333333333333333,
+      "calibration": 0.1111111111111111
+    },
+    "High": {
+      "antibody": 0.6428571428571429,
+      "specificity": 0.9285714285714286,
+      "sensitivity": 0.6785714285714286,
+      "nanomaterial": 0.7857142857142857,
+      "tmb": 0.5,
+      "binding": 0.5714285714285714,
+      "target": 0.7857142857142857,
+      "lod": 0.07142857142857142,
+      "calibration": 0.0
+    }
+  },
+  "concepts_within_question": {
+    "2": {
+      "n": 30,
+      "class_counts": {
+        "Low": 5,
+        "Mid": 15,
+        "High": 10
+      },
+      "by_class": {
+        "Low": {
+          "antibody": 0.4,
+          "specificity": 0.8,
+          "sensitivity": 0.2,
+          "nanomaterial": 0.6,
+          "tmb": 0.0,
+          "binding": 0.8,
+          "target": 0.8,
+          "lod": 0.2,
+          "calibration": 0.2
+        },
+        "Mid": {
+          "antibody": 0.4666666666666667,
+          "specificity": 0.6666666666666666,
+          "sensitivity": 0.13333333333333333,
+          "nanomaterial": 0.8,
+          "tmb": 0.0,
+          "binding": 0.8,
+          "target": 0.8,
+          "lod": 0.0,
+          "calibration": 0.06666666666666667
+        },
+        "High": {
+          "antibody": 0.9,
+          "specificity": 0.9,
+          "sensitivity": 0.4,
+          "nanomaterial": 0.6,
+          "tmb": 0.1,
+          "binding": 0.8,
+          "target": 0.9,
+          "lod": 0.0,
+          "calibration": 0.0
+        }
+      }
+    },
+    "3": {
+      "n": 22,
+      "class_counts": {
+        "Low": 5,
+        "Mid": 13,
+        "High": 4
+      },
+      "by_class": {
+        "Low": {
+          "antibody": 0.6,
+          "specificity": 0.2,
+          "sensitivity": 0.6,
+          "nanomaterial": 0.8,
+          "tmb": 0.0,
+          "binding": 0.4,
+          "target": 0.8,
+          "lod": 0.2,
+          "calibration": 0.2
+        },
+        "Mid": {
+          "antibody": 0.6923076923076923,
+          "specificity": 0.23076923076923078,
+          "sensitivity": 0.6153846153846154,
+          "nanomaterial": 1.0,
+          "tmb": 0.0,
+          "binding": 0.5384615384615384,
+          "target": 0.6153846153846154,
+          "lod": 0.0,
+          "calibration": 0.07692307692307693
+        },
+        "High": {
+          "antibody": 1.0,
+          "specificity": 1.0,
+          "sensitivity": 1.0,
+          "nanomaterial": 1.0,
+          "tmb": 0.0,
+          "binding": 0.25,
+          "target": 1.0,
+          "lod": 0.0,
+          "calibration": 0.0
+        }
+      }
+    }
+  }
+}
