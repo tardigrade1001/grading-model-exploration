@@ -16,9 +16,9 @@ For full terms, see: https://creativecommons.org/licenses/by/4.0/
 
 ---
 
-Data Notes:
-- exam_results_cleaned_final.csv: 122 exam answers with marks (anonymized)
-- synthetic_exam_data_categorical.csv: 400 synthetically generated answers
-- All identifying information (student names, instructor names) has been removed
-- Data is from educational assessment (BCE404 course)
-- No personal data is included
+Data notes:
+- exam_results_cleaned_final.csv: 122 exam answers with marks, no identifiers
+- synthetic_exam_data_categorical.csv: 400 machine-generated answers, unused
+- Provenance, anonymization, consent and known limitations are in DATA_CARD.md.
+  Read that before reusing this data. This licence covers redistribution. It
+  does not settle the consent question DATA_CARD.md raises.

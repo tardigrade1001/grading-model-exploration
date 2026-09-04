@@ -1,264 +1,112 @@
-# Failed Attempts: Why Large Language Models Didn't Work
+# Failed attempts: seven LLM fine-tuning runs
 
-This folder documents 7 different attempts to use large language models (Gemma 2, Qwen3.5) to predict exam marks. All failed. This is important to document because it shows:
+Seven attempts to fine-tune Gemma 2 9B and Qwen3.5-2B to predict exam marks.
+None produced a usable prediction. The scripts are kept here as a record of what
+was run.
 
-1. **What was tried**
-2. **Why it didn't work**
-3. **What we learned**
+## What these runs establish
 
-## Summary Table
+They establish that these seven configurations, built this way, on this data,
+did not work.
+
+They do not establish that language models cannot classify. The earlier version
+of this document concluded that "LLMs are built to generate text tokens, not
+predict numeric scores" and that the task was a fundamental mismatch. That
+conclusion is wrong, and the section below says why.
+
+## Summary
 
 | # | Model | Method | Data | Loss | Output | Accuracy |
-|---|-------|--------|------|------|--------|----------|
-| 1 | Gemma 2 9B | Language modeling | Synthetic 400 | 9.78 | All 0.0 | 0% |
-| 2 | Gemma 2 9B | Supervised fine-tuning | Synthetic 400 | 6.98 | All 0.0 | 0% |
-| 3 | Gemma 2 9B | Masked language modeling | Synthetic 400 | 6.38 | All 0.0 | 0% |
-| 4 | Qwen3.5-2B | Base trainer | Real 122 | — | Vision processor crash | 0% |
-| 5 | Qwen3.5-2B | Custom collator | Real 122 | — | .pad() method not found | 0% |
-| 6 | Qwen3.5-2B | Categorical A/B/C/D | Synthetic 400 | 35.88 | Garbage: %,&,) | 13% |
-| 7 | Gemma 2 9B | Minimal fast test | Synthetic 400 | 20.62 | Empty strings | 0% |
-
-## Detailed Analysis of Each Attempt
-
-### Attempt 1: Gemma 2 9B Language Modeling
-
-**File:** `finetune_gemma2_quick_improved.py`
-
-**Approach:** Fine-tune Gemma 2 9B on exam answers using causal language modeling loss
-
-**Setup:**
-```python
-from unsloth import FastLanguageModel
-model, tokenizer = FastLanguageModel.from_pretrained(
-    model_name="unsloth/gemma-2-9b",
-    max_seq_length=512,
-    load_in_4bit=True,
-)
-# Fine-tune with training loop...
-```
-
-**Result:** 
-- Training loss converged to 9.78
-- Model outputs: All predictions were 0.0 (the baseline prediction)
-- Accuracy: 0%
-
-**Why it failed:**
-- Language modeling loss optimizes for next-token prediction, not score prediction
-- Model learned to output the baseline value rather than learning the task
-- No explicit supervision for the mark prediction task
-
-### Attempt 2: Gemma 2 9B Supervised Fine-Tuning (SFT)
-
-**File:** `finetune_gemma2_slow_production_improved.py`
-
-**Approach:** Format as instruction-response pairs for SFT
-
-**Setup:**
-```
-Instruction: "You are grading an exam. Here is a student answer: [ANSWER]. Assign a mark from 1.0 to 4.0."
-Response: "[MARK]"
-```
-
-**Result:**
-- Training loss: 6.98 (lower than Attempt 1)
-- Model outputs: All 0.0
-- Accuracy: 0%
-
-**Why it failed:**
-- Even with explicit instruction format, model didn't learn to map text to numeric scores
-- LLMs are optimized for text generation, not numeric prediction
-- The mark prediction task is classification/regression, not generation
-
-### Attempt 3: Gemma 2 9B Masked Language Modeling
-
-**File:** `finetune_gemma2_masked.py`
-
-**Approach:** Mask answer text and predict marks as masked tokens
-
-**Setup:**
-```python
-# Format: [MASK] marks given to answer: [ANSWER]
-# Predict: [MASK] token should be the mark
-```
-
-**Result:**
-- Training loss: 6.38 (lowest so far)
-- Model outputs: All 0.0
-- Accuracy: 0%
-
-**Why it failed:**
-- Masked language modeling is for token prediction within text
-- Marks (numeric values) are not well-represented in token vocabulary
-- Task mismatch: MLM is for language understanding, not score prediction
-
-### Attempt 4: Qwen3.5-2B Base Trainer
-
-**File:** `finetune_qwen35_2b_base_trainer.py`
-
-**Approach:** Use Qwen3.5 (multimodal model) with standard trainer
-
-**Result:**
-- Error: `RuntimeError: Cannot create CUDA tensors without CUDA enabled`
-- Then: Vision processor crash trying to parse text as images
-
-**Why it failed:**
-- Qwen3.5 is a multimodal model (vision + language)
-- When given text, it tried to process it as visual input
-- Tokenizer mismatch between vision and text modalities
-
-### Attempt 5: Qwen3.5-2B Custom Collator
-
-**File:** `finetune_qwen35_2b_categorical.py`
-
-**Approach:** Create custom data collator to handle Qwen tokenizer
-
-**Setup:**
-```python
-class SimpleDataCollator:
-    def __call__(self, batch):
-        # Custom padding logic
-```
-
-**Result:**
-- Error: `AttributeError: 'Qwen3VLProcessor' object has no attribute 'pad'`
-- Model expects processor.pad() method that doesn't exist
-
-**Why it failed:**
-- Qwen3.5's processor wasn't designed for standard fine-tuning
-- Custom collator couldn't work around the architectural mismatch
-- Multimodal model architecture incompatible with text-only task
-
-### Attempt 6: Qwen3.5-2B Categorical (A/B/C/D)
-
-**File:** `finetune_qwen35_2b_categorical.py` (second version)
-
-**Approach:** Format marks as categorical classes: A=1.0, B=2.5, C=3.5, D=4.0
-
-**Setup:**
-```python
-# Expected tokens: 357 (A), 417 (B), 351 (C), 414 (D)
-# Model should learn to output one of these tokens
-```
-
-**Result:**
-- Training loss: 35.88
-- Model outputs: Garbage characters (%,&,))
-- Accuracy: 13% (some random correctness by chance)
-
-**Debug finding:** 
-- Training data verified correct (A/B/C/D strings present)
-- Model was outputting token 4 (%) instead of 357 (A)
-- Token mismatch: model never learned the task
-
-**Why it failed:**
-- Token vocabulary was wrong
-- Model never learned the categorical mapping
-- Multimodal architecture still fundamentally incompatible
-
-### Attempt 7: Gemma 2 9B Minimal Fast Test
-
-**File:** `gemma2_fast_test.py`
-
-**Approach:** Minimal configuration to quickly test if anything works
-
-**Setup:**
-```python
-# Simplest possible setup
-# Just try to predict marks
-```
-
-**Result:**
-- Training loss: 20.62
-- Model outputs: Empty strings or newlines only
-- Accuracy: 0%
-
-**Why it failed:**
-- Even minimal configuration couldn't work
-- Indicates fundamental task mismatch
-
-## Key Learning: Why LLMs Failed
-
-### The Core Problem
-
-**Large Language Models are built to generate text tokens, not predict numeric scores.**
-
-```
-LLM strength:  "The next token after 'The quick brown' is 'fox'"
-LLM weakness:  "Given answer text, the numeric score is 2.3"
-```
-
-### Why Loss Convergence Didn't Help
-
-Training loss converging doesn't mean the model learned the task. It meant:
-- Model learned to output baseline values (0, 0.0, empty string)
-- Model minimized loss by ignoring input and predicting average
-- Classic overfitting: loss goes down, accuracy stays at 0%
-
-### The Mismatch
-
-| LLM Design | Task Requirements |
-|-----------|-------------------|
-| Designed for text generation | Needs numeric prediction |
-| Billions of tokens trained | Only 122 examples to learn from |
-| Output is text | Output should be numbers |
-| Training on diverse web text | Training on domain-specific exams |
-
-## What Would Have Been Needed
-
-To make LLMs work for this task, you would need:
-
-1. **Much more training data** (1000+, not 122)
-2. **Different architecture** (regression head on top of embeddings, not text generation)
-3. **Different loss function** (MSE or classification loss, not language modeling loss)
-4. **Different fine-tuning approach** (prompt tuning, in-context learning, or LoRA adaptation)
-
-## Why Simple ML Worked Instead
-
-```python
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-
-# 50 TF-IDF features → identifies which keywords matter
-# LogisticRegression → learns weights for each keyword
-# Result: 56% accuracy
-```
-
-**Advantages:**
-- Directly solves the classification task
-- Doesn't overfit on 122 samples
-- Transparent: can see which features matter
-- Fast to train and iterate
-
-## Lessons
-
-1. **Use the right tool for the right task** — LLMs for generation, simple ML for classification
-2. **Loss convergence ≠ task learning** — Always check actual predictions
-3. **Understand your data before your model** — 122 exam answers is very small
-4. **Start simple** — Baseline first, then add complexity only if needed
-5. **Document failures** — They're often more informative than successes
-
-## Reproducibility
-
-All failed attempts are preserved in this folder. To run them (optional):
-
-```bash
-# Install optional dependencies
-pip install transformers torch unsloth xgboost
-
-# Run any attempt
-python finetune_gemma2_quick_improved.py
-python finetune_qwen35_2b_categorical.py
-# ... etc
-```
-
-They will fail as documented above, demonstrating the problem clearly.
-
-## Conclusion
-
-This folder documents a learning experience: sometimes the most valuable work is understanding why something doesn't work and pivoting to a better approach. The switch from LLM fine-tuning to simple ML resulted in:
-
-- Simple ML baseline: **56% accuracy** ✓
-- Engineered features: **68% accuracy** ✓
-- LLM attempts: **0% accuracy** ✗
-
-The successful approach was simpler, faster, and more interpretable.
+|---|---|---|---|---|---|---|
+| 1 | Gemma 2 9B | causal LM | synthetic 400 | 9.78 | constant 0.0 | 0% |
+| 2 | Gemma 2 9B | instruction SFT | synthetic 400 | 6.98 | constant 0.0 | 0% |
+| 3 | Gemma 2 9B | masked training | synthetic 400 | 6.38 | constant 0.0 | 0% |
+| 4 | Qwen3.5-2B | base trainer | real 122 | n/a | crash in the vision processor | n/a |
+| 5 | Qwen3.5-2B | custom collator | real 122 | n/a | `Qwen3VLProcessor` has no `.pad` | n/a |
+| 6 | Qwen3.5-2B | categorical A/B/C/D | synthetic 400 | 35.88 | punctuation tokens | 13% |
+| 7 | Gemma 2 9B | minimal test | synthetic 400 | 20.62 | empty strings | 0% |
+
+Four of the seven trained on the 400 synthetic answers, which no model in
+`results/` uses and which `DATA_CARD.md` recommends against. Two never trained
+at all.
+
+## Why the diagnosis was wrong
+
+Fine-tuning a decoder to emit a label is a standard and well-supported thing to
+do. Three routes were available and none of the seven runs took any of them.
+
+**A classification head.** Load the base model under
+`AutoModelForSequenceClassification` with `num_labels=3` and train with
+cross-entropy over the three bands. This is the direct form of the task. It
+needs no generation at all.
+
+**Constrained decoding.** Keep the generative setup and restrict the output
+distribution to the label tokens, then take the argmax over those. This removes
+the failure mode seen in runs 1, 2, 3 and 7, where the model minimized loss by
+emitting a constant string.
+
+**Scoring the candidates.** Compute the log-likelihood the model assigns to each
+of the three labels given the prompt, and pick the highest. This works with no
+fine-tuning at all and would have made a useful zero-shot baseline, which the
+project never established.
+
+Loss did converge in runs 1, 2 and 3. Converged loss on a free-form generation
+objective says the model found a low-entropy output. Emitting a constant is a
+low-entropy output. Nothing about that constitutes evidence about the task.
+
+## The specific failures
+
+**Runs 1, 2, 3, 7.** Free-form generation fine-tunes where the model settled on
+a constant output. The loss was computed over the whole sequence, so the label
+token contributed a small fraction of it. The signal that mattered was diluted
+into the prompt tokens.
+
+**Runs 4 and 5.** Ordinary API bugs. A vision-language checkpoint was loaded for
+a text-only task, so the processor expected image inputs and then lacked the
+`.pad` method the collator called. Neither run trained. Loading a text
+checkpoint would have avoided both.
+
+**Run 6.** Marks were mapped to the letters A, B, C and D, and the script
+asserted specific token ids for them. The model emitted punctuation instead.
+The 13% figure is below the majority-class rate of 37.7% and carries no
+information.
+
+Across all seven, no hyperparameter sweep was run. Learning rate, LoRA rank,
+sequence length and epoch count were each set once.
+
+## What the comparison with the sklearn models is worth
+
+The earlier version of this document closed by scoring the sklearn models at
+56% and 68% against the LLM runs at 0%, and read that as the simple approach
+winning.
+
+The 68% has since been withdrawn. `results/RESULTS.md` puts the best
+cross-validated model at 63.2%, against a text-free per-question majority rule
+at 63.1%. The sklearn side of that comparison does not clear its own baseline,
+so the comparison decides nothing.
+
+## What would test the question properly
+
+An honest LLM comparison on this dataset would run a zero-shot likelihood
+baseline first, since it costs nothing and needs no training. Then a
+classification head on a text encoder, cross-validated the same way as
+`scripts/evaluate.py`, and reported against the same per-question majority
+floor. On 122 answers, the likely outcome is that it also fails to clear the
+floor. That would be a result.
+
+## Files
+
+| file | attempt |
+|---|---|
+| `finetune_gemma2_quick_improved.py` | 1 |
+| `finetune_gemma2_slow_production_improved.py` | 2 |
+| `finetune_gemma2_masked.py` | 3 |
+| `finetune_qwen35_2b_base_trainer.py` | 4 |
+| `finetune_qwen35_2b_categorical.py` | 5 and 6 |
+| `gemma2_fast_test.py` | 7 |
+| `debug_gemma2_output.py` | output inspection for the Gemma runs |
+| `debug_raw_output.py` | output inspection for the Qwen runs |
+| `train_xgboost_on_synthetic.py` | an XGBoost regressor trained on the synthetic file, kept here for the same reason |
+
+These scripts need `transformers`, `torch`, `unsloth` and `xgboost`, none of
+which are in `requirements.txt`. Nothing in `results/` depends on them.

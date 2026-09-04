@@ -1,13 +1,11 @@
-pandas==2.1.4
-numpy==1.24.3
-scikit-learn==1.3.2
-matplotlib==3.8.2
-seaborn==0.13.1
-jupyter==1.0.0
-ipykernel==6.27.1
+# Everything scripts/evaluate.py, scripts/explore.py, scripts/make_figures.py
+# and scripts/check_docs.py need. Nothing else.
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+scipy>=1.10
+matplotlib>=3.7
 
-# Optional: for running failed LLM experiments
-# transformers==4.35.2
-# torch==2.1.1
-# unsloth @ git+https://github.com/unslothai/unsloth.git
-# xgboost==2.0.3
+# The scripts in failed_attempts/ additionally need transformers, torch,
+# unsloth and xgboost. They are left out on purpose. Nothing in results/
+# depends on them.

@@ -1,237 +1,212 @@
-# Grading Model Exploration
+# Grading model exploration
 
-Exploring machine learning approaches to predict exam marks from answer text. This project analyzes 122 real exam answers from an educational assessment context (BCE404 course) and develops models to understand what characteristics predict higher marks.
+Can a model predict the mark an instructor gave a handwritten exam answer, from
+the answer text alone? This repository works that question on 122 real answers
+from a biosensor course and reports what the data actually supports.
 
-**Core finding:** Simple machine learning models trained on textual features achieve 68% accuracy, demonstrating that grading patterns are learnable and consistent.
+**Headline result: no.** The best text model reaches 63.2% cross-validated
+accuracy on a 3-class target. A rule that reads no text at all, and predicts
+each question's most common class, reaches 63.1%. Once the model knows which
+question it is grading, the answer text adds nothing measurable at this sample
+size.
 
-## Project Overview
+That is the finding. This repository is written to make it checkable.
 
-The goal was to build a system that could predict exam marks from student answer text alone. We tested multiple approaches:
+![Results summary](figures/results_summary.png)
 
-1. **Large Language Model fine-tuning** (Gemma 2 9B, Qwen3.5-2B) — 7 different configurations, all failed
-2. **Simple machine learning** (TF-IDF + LogisticRegression) — 56% baseline accuracy
-3. **Feature engineering** (domain-informed features) — 68% final accuracy
+## What changed from the first version
 
-The key insight: **Simple ML beats complex models when you understand the data.**
+The first version of this project reported 68% held-out accuracy and read it as
+evidence that grading patterns are learnable. Three things were wrong with that.
 
-## Quick Start
+1. **No baseline.** The 68% was never compared against predicting each
+   question's majority class. That floor sits at 63.1% and the model does not
+   clear it. Question 4 alone is 26 Low marks out of 28, so a model told the
+   question number scores that question at 93% without reading a word.
+2. **Leakage into the feature definitions.** The length thresholds (600 and 400
+   characters) and the concept vocabulary were chosen by reading all 122
+   answers, and then a held-out score was reported on 25 of those same answers.
+   Those thresholds are now fitted per training fold.
+3. **One split reported as a result.** With 122 rows an 80/20 split leaves 25
+   test answers. Across 20 different stratified splits of the same data, the
+   same model scores anywhere from 40% to 76%. The 68% was one draw from that
+   spread.
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the main analysis
-jupyter notebook notebooks/grading_analysis.ipynb
-
-# Generate figures
-python scripts/grading_patterns_analysis.py
-python scripts/analyze_professor_grading.py
-```
-
-## Repository Structure
-
-```
-grading-model-exploration/
-├── README.md                    # This file
-├── METHODOLOGY.md               # Technical approach & ML details
-├── FINDINGS.md                  # Patterns discovered in the data
-├── LICENSE                      # MIT license
-├── DATA_LICENSE                 # CC-BY-4.0 (data)
-├── requirements.txt             # Python dependencies
-│
-├── notebooks/
-│   └── grading_analysis.ipynb   # Main analysis & visualization
-│
-├── data/
-│   ├── exam_results_cleaned_final.csv        # Real exam data (122 answers, 3 cols)
-│   └── synthetic_exam_data_categorical.csv   # Failed synthetic approach (documentation)
-│
-├── scripts/
-│   ├── improved_classifier_engineered.py     # Best model (68% accuracy)
-│   ├── real_data_3class_classifier.py        # Baseline model (56% accuracy)
-│   ├── analyze_professor_grading.py          # Domain analysis of grading patterns
-│   ├── verify_model_actually_works.py        # Model validation & test set evaluation
-│   ├── train_xgboost_grader.py               # Attempted XGBoost approach
-│   └── grading_patterns_analysis.py          # Generate visualizations (4 graphs)
-│
-├── failed_attempts/
-│   ├── README.md                             # Why LLM approaches failed
-│   ├── finetune_gemma2_quick_improved.py     # Attempt 1: Gemma 2 language modeling
-│   ├── finetune_gemma2_slow_production_improved.py  # Attempt 2: Gemma 2 SFT
-│   ├── finetune_gemma2_masked.py             # Attempt 3: Masked training
-│   ├── finetune_qwen35_2b_base_trainer.py    # Attempt 4: Qwen3.5 base
-│   ├── finetune_qwen35_2b_categorical.py     # Attempt 5: Qwen3.5 categorical
-│   ├── gemma2_fast_test.py                   # Attempt 6: Fast test
-│   ├── debug_raw_output_qwen.py              # Debug output issues
-│   └── debug_gemma2_output.py                # Debug output issues
-│
-├── figures/
-│   ├── grading_patterns_analysis.png         # 4 graphs (length, concepts, questions, features)
-│   ├── grading_patterns_analysis.svg         # Vector version for scaling
-│   └── grading_patterns_analysis.pdf         # High quality print version
-│
-└── docs/
-    └── (additional documentation)
-```
-
-## Data
-
-**Real exam data:** 122 student answers with marks assigned by an instructor
-- Column `question_number`: Which exam question (1, 2, 3, or 4)
-- Column `transcribed_text`: Student's answer text
-- Column `normalized_mark`: Grade assigned (1.0 to 4.0 scale)
-
-**Data cleaning:** Removed duplicates, blank answers, and incomplete entries. No synthetic data is used in the final models.
-
-```
-Mark distribution:
-1.0: 22 answers    (18%)
-1.5: 19 answers    (16%)
-2.0: 36 answers    (30%)
-2.5: 10 answers    (8%)
-3.0: 17 answers    (14%)
-3.5: 1 answer      (1%)
-4.0: 17 answers    (14%)
-```
-
-## Exam Questions
-
-The dataset contains student answers to 4 exam questions from BCE404 Biosensor course:
-
-| Question | Topic | Avg Mark | Sample Size |
-|----------|-------|----------|-------------|
-| Q1 | Colorimetric biosensors using nanomaterials | 3.00 | 29 |
-| Q2 | Biofunctionalization of gold nanoparticles | 2.36 | 35 |
-| Q3 | Physicochemical properties of nanomaterials | 2.07 | 30 |
-| Q4 | Limit of Detection (LOD) definition | 1.38 | 28 |
-
-**Key observation:** Question 4 receives significantly lower marks (1.6 points lower than Q1) across all students, suggesting either higher difficulty or stricter grading standards applied to that question.
+The concept features carry a fourth problem. `mentions_lod` fires on 100% of Q4
+answers and near 0% elsewhere. `mentions_tmb` fires on 95% of Q1 and near 0%
+elsewhere. Read pooled across questions these look like a grading rubric. They
+are question detectors. `FINDINGS.md` works through this.
 
 ## Results
 
-### Model Performance
+Full tables in [`results/RESULTS.md`](results/RESULTS.md), regenerated by one
+script. Cross-validation is repeated stratified 5-fold, 10 repeats, 50 fits per
+model.
 
-| Approach | Features | Accuracy (CV) | Test Accuracy |
-|----------|----------|---------------|---------------|
-| TF-IDF only | 50 features | 54.5% | 56% |
-| TF-IDF + engineered | 45 features | 62.8% | 68% |
+| Model | CV accuracy (mean ± sd) |
+|---|---|
+| `majority_class` | 0.377 ± 0.013 |
+| `tfidf_only` | 0.594 ± 0.070 |
+| `question_only` | 0.609 ± 0.081 |
+| `concepts_only` | 0.630 ± 0.074 |
+| `per_question_majority` | 0.631 ± 0.082 |
+| `full` | 0.632 ± 0.064 |
+| `text_features_no_question` | 0.636 ± 0.072 |
+| `question_plus_length` | 0.641 ± 0.072 |
+| `length_only` | 0.643 ± 0.086 |
 
-**Engineered features** capture domain insights:
-- Mention of specific required concepts (antibodies, specificity, nanomaterials)
-- Answer length and detail level
-- Concept overuse penalties (e.g., focusing too much on LOD)
-- Question-level differences
+Every model above the majority floor lands inside one standard deviation of
+every other. The ordering is noise. `length_only` reads two numbers off the
+text and matches the model with 47 features.
 
-### Key Patterns Found
+Comparing means is weak when the standard deviations overlap this much, so the
+`full` model and the text-free `per_question_majority` baseline are also
+differenced fold by fold across the same 50 folds.
 
-See `FINDINGS.md` for detailed analysis. Summary:
+| quantity | value |
+|---|---|
+| mean difference in accuracy | +0.0007 |
+| folds where the full model wins | 20 of 50 |
+| Wilcoxon signed-rank p | 0.965 |
 
-1. **Length bias:** High marks average 2.4× longer answers (953 vs 397 characters)
-2. **Required concepts:** Specificity appears in 91% of high marks, LOD in 71% of low marks
-3. **Question variation:** Q1 averages 3.0 marks, Q4 averages 1.38 marks (1.6 point gap)
-4. **Learnable patterns:** Model's top features (antibodies, word count, nanomaterials) match grading reality
+The two are indistinguishable.
 
-### Feature Importance (Final Model)
+Out-of-fold predictions from the `full` model, by question, against the
+text-free question-majority rule:
+
+| Question | n | `full` model | Question-majority rule |
+|---|---|---|---|
+| Q1 | 29 | 0.586 | 0.586 |
+| Q2 | 35 | 0.514 | 0.486 |
+| Q3 | 30 | 0.500 | 0.567 |
+| Q4 | 28 | 0.929 | 0.929 |
+| **All** | 122 | **0.623** | **0.631** |
+
+## What the data does support
+
+Answer length correlates with mark inside each question, where question
+identity cannot explain it. Pearson r on the training split runs 0.36 on Q1,
+0.59 on Q2, 0.52 on Q3, 0.65 on Q4.
+
+This is a correlation in 122 answers marked by one person on one paper. It is
+consistent with longer answers covering more of the expected content, and it is
+consistent with a length bias in the marking. This dataset cannot separate
+those, and nothing in this repository should be read as showing that writing
+more causes a higher mark.
+
+## Repository layout
 
 ```
-Mentions antibodies:         0.6355  ← Strongest predictor
-Answer word count:           0.5383
-Mentions nanomaterials:      0.4878
-Is detailed (600+ chars):    0.4714
-Overuses calibration:        0.4493
-Answer length (raw chars):   0.4144
+.
+├── README.md              this file
+├── METHODOLOGY.md         how the evaluation is set up and why
+├── FINDINGS.md            the confounding, worked through
+├── DATA_CARD.md           provenance, anonymization, consent, limitations
+├── LICENSE                MIT, code
+├── DATA_LICENSE           CC-BY-4.0, data
+├── requirements.txt
+│
+├── data/
+│   ├── exam_results_cleaned_final.csv        122 real answers, 3 columns
+│   └── synthetic_exam_data_categorical.csv   400 generated answers, unused
+│
+├── src/grading/
+│   ├── data.py            loading and the 3-class label definition
+│   ├── features.py        transformers that fit their thresholds on train rows
+│   └── models.py          the baseline ladder and the full model
+│
+├── scripts/
+│   ├── evaluate.py        the only script that reports a metric
+│   ├── explore.py         exploratory analysis, training split only
+│   ├── make_figures.py    figures, drawn from results/metrics.json
+│   └── check_docs.py      fails if the markdown drifts from the results
+│
+├── tests/                 pytest, including the leakage guarantees
+│   ├── test_data.py
+│   ├── test_leakage.py
+│   └── test_evaluate.py
+│
+├── results/               generated
+│   ├── metrics.json       every accuracy in the repository
+│   ├── RESULTS.md
+│   ├── exploration.json   every descriptive table in FINDINGS.md
+│   └── EXPLORATION.md
+│
+├── figures/               generated
+│   └── results_summary.{png,svg,pdf}
+│
+└── failed_attempts/       seven LLM fine-tuning runs, kept as a record
 ```
 
-## Visualizations
-
-![Grading Patterns Analysis](figures/grading_patterns_analysis.png)
-
-**Top left:** Answer length increases linearly with marks (2.4× difference)  
-**Top right:** Concept frequency differs sharply between mark levels  
-**Bottom left:** Question 4 receives ~1.6 points lower than Question 1  
-**Bottom right:** ML model feature importance shows what drives predictions
-
-See `FINDINGS.md` for detailed interpretation of each graph.
-
-## Why Simple ML Worked
-
-1. **Small dataset (122 samples)** — Complex models overfit; simple models generalize better
-2. **Clear patterns in data** — Grading follows consistent rules based on measurable features
-3. **Good feature engineering** — Domain analysis identified what matters more than raw text
-4. **Reproducibility** — Scikit-learn models are transparent and auditable
-
-## Why LLM Fine-tuning Failed
-
-See `failed_attempts/README.md` for detailed analysis. Short version:
-
-- 7 different configurations (language modeling, SFT, masked training, categorical)
-- All produced zero accuracy or garbage output
-- Root cause: LLMs generate text, not classify scores. They're built for the wrong task.
-- Even with correct training data and proper hyperparameters, the models never learned meaningful patterns
-
-## Files Guide
-
-**To understand the project:**
-- Start with `METHODOLOGY.md` for technical approach
-- Then read `FINDINGS.md` for what was discovered
-- Run `notebooks/grading_analysis.ipynb` to see code and visualizations
-
-**To replicate results:**
-- `scripts/improved_classifier_engineered.py` is the best model
-- `scripts/verify_model_actually_works.py` shows test set evaluation
-- `data/exam_results_cleaned_final.csv` contains the 122 real answers
-
-**To understand failures:**
-- `failed_attempts/README.md` explains why LLM approaches didn't work
-- Browse the `finetune_*.py` scripts to see what was attempted
-
-## Key Learnings
-
-1. **Data quality over quantity** — 122 real exam answers beats 400 synthetic ones
-2. **Domain understanding matters** — Analyzing patterns reveals what to measure
-3. **Simple baselines first** — Understand the problem before using complex tools
-4. **Proper evaluation** — 5-fold cross-validation + separate test set prevents overfitting
-5. **Reproducibility** — All code and data are provided for full transparency
-
-## Dependencies
-
-- Python 3.10+
-- pandas, numpy, scikit-learn
-- matplotlib, seaborn (visualizations)
-- Unsloth, transformers, torch (for failed LLM attempts, optional)
-
-See `requirements.txt` for exact versions.
-
-## License
-
-Code: MIT License (see `LICENSE`)  
-Data: CC-BY-4.0 (see `DATA_LICENSE`)
-
-## Notes
-
-- This is an exploratory analysis of real educational assessment data
-- Course code mentioned: BCE404
-- No instructor or student names are included in the repository
-- The project demonstrates techniques that could apply to other assessment contexts
-
-## Reproducibility
-
-All scripts can be run independently. No external APIs or credentials needed. The Jupyter notebook includes all analysis steps with outputs visible.
+## Running it
 
 ```bash
-# Generate the figures (4 graphs)
-python scripts/grading_patterns_analysis.py
-
-# Train the best model on full data
-python scripts/improved_classifier_engineered.py
-
-# See validation results
-python scripts/verify_model_actually_works.py
-
-# Analyze grading patterns
-python scripts/analyze_professor_grading.py
+pip install -e ".[dev]"
+make                             # regenerate everything, then verify the write-up
+make test                        # pytest
 ```
 
----
+Or step by step:
 
-**Questions or suggestions?** This project is part of a learning journey in machine learning. Feedback is welcome.
+```bash
+python scripts/evaluate.py                    # results/metrics.json, results/RESULTS.md
+python scripts/explore.py                     # results/exploration.json, results/EXPLORATION.md
+python scripts/make_figures.py                # figures/results_summary.*
+python scripts/check_docs.py --check-results  # verify the markdown, and the results
+```
+
+`scripts/evaluate.py` is the single source of every accuracy quoted in this
+repository, and `scripts/explore.py` is the single source of every descriptive
+table in `FINDINGS.md`. The tables in the markdown are copied from those two,
+and `check_docs.py` verifies all 62 of them, then recomputes the results and
+confirms the committed files still match a fresh run. CI runs the same chain on
+every push, on Python 3.10 and 3.12.
+
+The leakage guarantee is tested, not only asserted. `tests/test_leakage.py`
+fails if the length thresholds stop being learned per fold, or if a sentinel
+token planted in the held-out rows reaches the fitted vocabulary.
+
+Rerunning with the default seed reproduces every number exactly. No API keys, no
+credentials, no GPU.
+
+## The LLM fine-tuning attempts
+
+`failed_attempts/` holds seven runs across Gemma 2 9B and Qwen3.5-2B that never
+produced a usable prediction. Two crashed on processor and collator errors, one
+emitted garbage tokens, the rest converged to constant output.
+
+These runs failed. The reason is not that language models cannot classify. They
+can, and the standard approaches are a classification head on the encoder, a
+constrained decode over the label tokens, or a scored comparison of the
+candidate labels. None of the seven runs did any of those. They were free-form
+generation fine-tunes on 122 to 400 examples, several of them on synthetic
+data, at hyperparameters that were never swept. Attempts 4 and 5 are ordinary
+API bugs.
+
+What the runs support is narrow. Seven specific configurations, built this way,
+on this much data, did not work. `failed_attempts/README.md` says what each one
+did.
+
+## Limitations
+
+- 122 answers, 4 questions, one instructor, one paper. Roughly 30 answers per
+  question, and every per-question number rests on that.
+- Marks and answer text both come from automated extraction with no measured
+  error rate. See `DATA_CARD.md`.
+- Q4 is 26 Low out of 28, so it carries almost no variation to model and it
+  inflates any pooled accuracy.
+- The 3-class banding of a 7-value ordinal mark discards information. An ordinal
+  model on the raw marks was not tried.
+- Nothing here transfers to another grader, another paper, or another course.
+
+## Where this could go
+
+The useful next step is more questions. Question identity accounts for the
+signal on this data, so a dataset spanning several papers and more than one
+marker would let the text carry something. Within the current data, an
+ordinal model on the raw 1.0 to 4.0 marks, evaluated per question, is the one
+untried idea that the sample size still permits.
+
+## Licence
+
+Code MIT, data CC-BY-4.0. Read `DATA_CARD.md` before reusing the data.

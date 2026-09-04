@@ -1,246 +1,145 @@
 # Methodology
 
-This document explains the technical approach, data processing, and machine learning methods used in this project.
+How the evaluation in `results/` is set up, and why each choice was made.
+
+## Task
+
+Given the text of a student's exam answer and the number of the question it
+answers, predict which of three bands the instructor's mark falls into.
+
+| band | marks | count |
+|---|---|---|
+| Low | 1.0, 1.5 | 41 |
+| Mid | 2.0, 2.5 | 46 |
+| High | 3.0, 3.5, 4.0 | 35 |
+
+The underlying mark is ordinal with seven levels. Banding into three throws
+away ordering information and it keeps every class large enough to stratify a
+5-fold split at n=122. Seven-level classification on 122 rows puts one answer in
+the 3.5 class. That is not a class. The banding is defined once in
+`src/grading/data.py` and imported everywhere, so no script can quietly use a
+different one.
+
+## The baseline ladder
+
+A model on this data is only interesting if it beats what you get for free.
+Four floors, in order of how much each concedes to the model:
+
+**`majority_class`** predicts Mid for everything. 37.7%.
+
+**`question_only`** sees the question number and nothing else. 60.9%. This is
+the number that matters. The four questions differ sharply in marking, most of
+all Q4, which holds 26 Low marks out of 28. A model that reaches 63% while
+knowing the question has demonstrated very little.
+
+**`length_only`** sees the character count, the word count, and two
+length flags. 64.3%.
+
+**`per_question_majority`** predicts each question's most common training
+class. 63.1%. It reads no answer text. It is a fitted estimator like every
+other entry in the ladder, so it learns its question-to-class map on the
+training rows of each fold and is scored on the held-out rows of that fold.
+That is what makes the comparison with the text models fair. On this data the
+map is stable enough that the in-sample, out-of-fold and cross-validated
+figures all land on 63.1%.
+
+The remaining models add TF-IDF and concept flags on top. `results/RESULTS.md`
+carries the full table.
+
+## Preventing leakage
+
+Every model is a single sklearn `Pipeline` that takes the raw dataframe. Fitting
+a pipeline fits its vectoriser, its scaler, and its length thresholds on the
+rows it is handed and nothing else. The same object then goes to
+`cross_val_score`, to `cross_val_predict`, and to the held-out split, so the
+boundary is enforced by construction and there is no manual bookkeeping to get
+wrong.
+
+Two specific leaks in the first version of this project are closed by this.
+
+**Vectoriser fitted on everything.** The earlier notebooks called
+`TfidfVectorizer.fit_transform` on all 122 answers, then split. The vocabulary
+and the document frequencies had seen the test rows.
+
+**Thresholds chosen by reading the whole dataset.** `is_detailed` was defined
+as 600 characters or more, and `is_minimal` as under 400, after reading that
+high marks averaged 953 characters and low marks 397 across all 122 answers.
+`LengthFeatures` in `src/grading/features.py` now learns those cut-offs in
+`fit`, as the 75th and 25th percentile of the training rows it is given.
+
+One thing this does not close. The concept vocabulary in `CONCEPT_PATTERNS` was
+written by hand after looking at the data. It is fixed before any model is
+fitted, so it does not move between folds, and the effect it does have is
+visible in the `concepts_only` row of the ladder. It is disclosed here because
+disclosure is the only available fix. The vocabulary is small, it is drawn from
+the exam questions, and `FINDINGS.md` shows that what it mostly encodes is
+question identity.
+
+## Separating discovery from evaluation
+
+`scripts/explore.py` reads only the 97 training rows of the split that
+`scripts/evaluate.py` holds out. It prints tables and correlations and it prints
+no accuracy. Anything it turns up can become a feature without touching the
+reported metrics.
+
+`scripts/evaluate.py` prints every accuracy in the repository and discovers
+nothing. It writes `results/metrics.json` and `results/RESULTS.md`, and every
+table in `README.md`, `METHODOLOGY.md` and `FINDINGS.md` is copied from those.
+`scripts/make_figures.py` draws from `results/metrics.json` for the same reason,
+so a panel cannot disagree with a table.
+
+## What is reported and why
+
+**Repeated stratified 5-fold cross-validation, 10 repeats.** 50 fits per model.
+The mean is stable enough to compare models. The standard deviation across the
+50 fits shows how far apart two models have to be before the difference means
+anything, and on this data almost none of them are.
+
+**A single stratified 80/20 held-out split, with a Wilson interval.** Kept
+because it is what the first version reported, and shown with its interval so
+the reason to distrust it is visible. 25 test answers gives a 95% interval
+roughly 35 percentage points wide for every model in the ladder. The Wilson
+form is used because the normal approximation is unreliable at that size.
+
+**A split-sensitivity sweep.** The `full` model refitted across 20 different
+stratified 80/20 splits of the same data. The results run from 40% to 76%. Any
+single held-out number from this dataset reports the split as much as it
+reports the model.
 
-## Problem Statement
+**A paired comparison against the baseline.** `cross_val_score` visits the
+same 50 folds in the same order for every model, so the score vectors are
+aligned fold for fold. The `full` model and `per_question_majority` are
+differenced on those pairs and tested with a Wilcoxon signed-rank test. Two
+mean accuracies whose standard deviations overlap this much cannot be compared
+directly. The paired test can.
 
-Given student exam answer text, can we predict the mark assigned by an instructor? This is essentially a regression problem (predicting continuous scores 1.0-4.0) that we treat as a 3-class classification problem (Low: 1.0-1.5, Mid: 2.0-2.5, High: 3.0-4.0).
+**Out-of-fold predictions by question.** Predictions for all 122 answers, each
+made by a model that did not see it, broken down by question and set against
+the per-question majority rule. This is the evaluation that answers the actual
+research question, and the first version of this project never ran it.
 
-## Data Source & Preparation
+## Reading the coefficients
 
-### Raw Data Collection
+Logistic regression coefficients are not reported as feature importances
+anywhere in this repository, and the earlier ranking of them has been removed.
 
-- **122 student exam answers** from a 4-question assessment
-- **Source:** Handwritten exam papers transcribed to text
-- **Format:** Question number, answer text, instructor-assigned mark (1.0-4.0 scale)
+The features are correlated with each other and with question identity.
+`mentions_lod` and `is_q4` fire on nearly the same rows. TF-IDF terms overlap
+with the concept flags. Under that correlation the coefficients split the shared
+signal in a way that depends on the fold and on the regularization strength, so
+a ranking of them is not stable and does not say what drives a prediction.
 
-### Data Cleaning
+The ladder in `results/RESULTS.md` answers the same question better. Fit a model
+on one feature group at a time and read what each group is worth on its own.
 
-1. **Removed incomplete entries:** Blank answers, illegible text, marks outside 1.0-4.0 range
-2. **Deduplicated:** Removed identical answers (suggesting duplicate records)
-3. **Text normalization:** Lowercase, stripped whitespace, no additional preprocessing
-4. **Final dataset:** 122 answers across 4 questions
+## Reproducing
 
-### Mark Distribution
-
-```
-Class       Count   Percentage
-1.0         22      18%
-1.5         19      16%
-2.0         36      30%
-2.5         10      8%
-3.0         17      14%
-3.5         1       1%
-4.0         17      14%
-Total       122     100%
-```
-
-**Classification scheme:**
-- Low: 1.0-1.5 (34 answers, 28%)
-- Mid: 2.0-2.5 (46 answers, 38%)
-- High: 3.0-4.0 (35 answers, 29%)
-- Note: 3.5 merged into High class due to small sample
-
-## Feature Engineering
-
-### Text Features (TF-IDF)
-
-1. **TF-IDF vectorization** (50 features, vocabulary from answer text)
-   - Term frequency inverse document frequency
-   - Captures which keywords/concepts appear in high vs low-scoring answers
-   - Common words (the, is, a) get lower weight
-   - Distinctive concepts get higher weight
-
-### Domain-Informed Engineered Features
-
-Based on manual analysis of grading patterns, 15 additional features were created:
-
-#### Concept Presence Features
-
-```python
-concepts_good = {
-    'mentions_antibody': r'\banti\w*bod\w*',
-    'mentions_specificity': r'\bspecificit\w*',
-    'mentions_sensitivity': r'\bsensitivit\w*',
-    'mentions_nanomaterial': r'\bnano\w*',
-    'mentions_tmb': r'\btmb\b',
-    'mentions_binding': r'\bbind\w*',
-    'mentions_target': r'\btarget\w*',
-}
-
-concepts_bad = {
-    'overuses_lod': r'\blod\b|\blimit.*detection\b',
-    'overuses_calibration': r'\bcalibr\w*',
-}
-```
-
-**Rationale:** Manual inspection of high vs low-scoring answers revealed that certain concepts appear frequently in high marks (antibodies: 63%, specificity: 91%) while others appear in low marks (LOD: 71%, calibration: 63%).
-
-#### Length Features
-
-```python
-answer_length = len(transcribed_text)  # Raw character count
-answer_words = len(transcribed_text.split())  # Word count
-is_detailed = 1 if answer_length >= 600 else 0  # Binary: detailed or not
-is_minimal = 1 if answer_length < 400 else 0  # Binary: very brief
-```
-
-**Rationale:** High marks average 953 characters, low marks 397 characters (2.4× difference). The relationship is linear and consistent.
-
-#### Question Features
-
-```python
-is_q4 = 1 if question_number == 4 else 0
-is_q1 = 1 if question_number == 1 else 0
-```
-
-**Rationale:** Question 4 averages 1.38 marks, Question 1 averages 3.0 marks. Significant question-level bias exists.
-
-### Feature Summary
-
-- **TF-IDF features:** 50 (raw text features)
-- **Engineered features:** 15 (domain-informed)
-- **Total features:** 65 for full model, 45 selected by importance
-
-## Model Development
-
-### Approach 1: Large Language Model Fine-tuning (Failed)
-
-Attempted 7 different configurations:
-
-| # | Model | Method | Data | Outcome |
-|---|-------|--------|------|---------|
-| 1 | Gemma 2 9B | Language modeling | Synthetic 400 | Loss converged, output: all 0.0 |
-| 2 | Gemma 2 9B | Supervised fine-tuning | Synthetic 400 | Loss: 6.98, output: all 0.0 |
-| 3 | Gemma 2 9B | Masked training | Synthetic 400 | Loss: 6.38, output: all 0.0 |
-| 4 | Qwen3.5-2B | Base trainer | Real 122 | Vision processor crash |
-| 5 | Qwen3.5-2B | Custom collator | Real 122 | Processor.pad() not found |
-| 6 | Qwen3.5-2B | Categorical A/B/C/D | Synthetic 400 | Loss: 35.88, output: garbage |
-| 7 | Gemma 2 9B | Minimal fast test | Synthetic 400 | Loss: 20.62, output: empty |
-
-**Why it failed:**
-- LLMs are trained to generate tokens, not predict classes
-- Even with correct training data, models never learned the task
-- Large models overfit on small datasets
-- Synthetic data (400 answers with random marks) provided no learning signal
-
-See `failed_attempts/README.md` for detailed analysis of each attempt.
-
-### Approach 2: Simple ML Baseline (56% Accuracy)
-
-**Model:** LogisticRegression with TF-IDF features
-
-```python
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
-
-vectorizer = TfidfVectorizer(max_features=50, lowercase=True)
-model = LogisticRegression(class_weight='balanced', max_iter=1000)
-
-pipeline = Pipeline([
-    ('vectorizer', vectorizer),
-    ('classifier', model)
-])
-```
-
-**Training:** 5-fold StratifiedKFold cross-validation on 122 samples  
-**CV accuracy:** 54.5% ± 14.6%  
-**Hold-out test (20%, 25 samples):** 56%
-
-**Why it worked:** Simple models don't overfit on small datasets. TF-IDF captures keyword presence which correlates with marks.
-
-### Approach 3: Engineered Features (68% Accuracy)
-
-**Model:** LogisticRegression with TF-IDF + 15 engineered features
-
-```python
-# Combine TF-IDF features (50) + engineered features (15)
-X_combined = np.hstack([tfidf_features, engineered_features])
-
-model = LogisticRegression(class_weight='balanced', max_iter=1000)
-```
-
-**Training:** Same 5-fold cross-validation  
-**CV accuracy:** 62.8% ± 5.7%  
-**Hold-out test:** 68% (17 out of 25 correct)
-
-**Improvement:** +12 percentage points from baseline (56% to 68%)
-
-**What the features learned:**
-- Top predictor: Mention of antibodies (0.6355 importance)
-- Length strongly matters (0.5383 for word count)
-- Presence of key concepts (nanomaterials: 0.4878)
-- Question number affects grading (question-level bias)
-
-## Evaluation Methodology
-
-### Cross-Validation
-
-- **5-fold Stratified KFold** splits: Ensures each fold has same class distribution
-- **Reason:** With only 122 samples, must use all data for training while getting unbiased estimates
-- **Reported metric:** Mean accuracy across 5 folds with standard deviation
-
-### Test Set Evaluation
-
-- **Hold-out test:** 20% of data (25 samples), selected before model training
-- **Reason:** Final check for overfitting on unseen data
-- **Reported metric:** Accuracy on test set only
-
-### Metrics
-
-```
-Accuracy = (TP + TN) / Total
-
-Macro precision/recall/F1 for class imbalance awareness
-```
-
-No separate validation set (too small). Relied on cross-validation for hyperparameter tuning.
-
-## Data vs Model Complexity
-
-A key observation: With 122 samples,
-
-```
-Simple model + Good features >> Complex model + Bad features
-56% (LR + TF-IDF)    <  68% (LR + TF-IDF + engineered)
-0% (LLM attempts)    <  56% (Simple baseline)
-```
-
-**Why simple models won:**
-1. Less risk of overfitting on small dataset
-2. Easier to understand which features matter
-3. Faster to train and iterate
-4. More reproducible results
-
-## Synthetic Data Experiment
-
-Created 400 synthetic answers using an LLM with random marks. Goal: increase dataset size for LLM training.
-
-**Result:** Completely useless. No model (including LLMs) could learn from random labels. This taught a valuable lesson: data quality matters infinitely more than data quantity.
-
-## Reproducibility
-
-All code is provided:
-- Data preprocessing: `scripts/analyze_professor_grading.py`
-- Feature engineering: In `improved_classifier_engineered.py`
-- Model training: `scripts/improved_classifier_engineered.py`
-- Evaluation: `scripts/verify_model_actually_works.py`
-
-To reproduce:
 ```bash
-python scripts/improved_classifier_engineered.py  # Trains on full 122 samples
-python scripts/verify_model_actually_works.py     # Tests on 25-sample hold-out set
+pip install -r requirements.txt
+python scripts/evaluate.py
+python scripts/make_figures.py
 ```
 
-## Limitations & Future Work
-
-1. **Small dataset:** 122 answers is very limited. More data would reduce variance in CV results.
-2. **Single instructor:** Patterns might be instructor-specific. Would be interesting to compare across teachers.
-3. **Single course:** Different courses might have different patterns.
-4. **Binary text features:** Could add sentiment analysis, readability metrics, named entity recognition.
-5. **Sequential models:** RNNs/Transformers could capture answer structure, but risk overfitting on 122 samples.
-
-## Conclusion
-
-Simple machine learning trained on carefully engineered features outperformed complex models on this task. The 68% accuracy demonstrates that exam grading follows learnable, consistent patterns based on measurable textual characteristics.
+The default seed is 0, set in `src/grading/models.py`. `results/metrics.json`
+records the seed and the versions of Python, scikit-learn, numpy and pandas it
+ran under. Pass `--seed` to `evaluate.py` to see how much of the output moves.

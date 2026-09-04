@@ -33,7 +33,9 @@ MANIFEST
 
 # Jupyter Notebook
 .ipynb_checkpoints
-*.ipynb
+# Note: *.ipynb is deliberately NOT ignored. The earlier version of this file
+# ignored it while README.md told readers to run a notebook that was therefore
+# never committed.
 
 # IPython
 profile_default/
