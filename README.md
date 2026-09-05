@@ -4,8 +4,8 @@ Can a model predict the mark an instructor gave a handwritten exam answer, from
 the answer text alone? This repository works that question on 122 real answers
 from a biosensor course and reports what the data actually supports.
 
-**A question-only baseline matches the text model.** Predicting each
-question's most common class, ignoring the answer entirely, reaches 63.1%
+**A question-only baseline matches the text model.** Predicting the most
+common class per question, ignoring the answer entirely, reaches 63.1%
 cross-validated accuracy on a 3-class target. The best text model reaches
 63.2%. At 122 answers the text lands level with that baseline once the model
 knows which question it is grading.
@@ -18,8 +18,8 @@ That is the finding. This repository is written to make it checkable.
 
 Four controls define what the numbers here mean.
 
-1. **A baseline to read against.** Every score sits beside predicting each
-   question's majority class, a floor of 63.1%. Question 4 alone is 26 Low marks
+1. **A baseline to read against.** Every score sits beside predicting the
+   majority class per question, a floor of 63.1%. Question 4 alone is 26 Low marks
    out of 28, so a model given the question number alone scores it at 93%.
 2. **Feature definitions fitted per fold.** The length thresholds (600 and 400
    characters) and the concept vocabulary are learned inside each training fold,
@@ -189,8 +189,8 @@ What the runs cover is narrow: seven configurations at this data size.
 
 - 122 answers, 4 questions, one instructor, one paper. Roughly 30 answers per
   question, and every per-question number rests on that.
-- Marks and answer text both come from automated extraction, and measuring its
-  error rate remains open. See `DATA_CARD.md`.
+- Marks and answer text both come from automated extraction, and measuring the
+  error rate of that extraction remains open. See `DATA_CARD.md`.
 - Q4 is 26 Low out of 28, so it is close to single-valued and it inflates any
   pooled accuracy.
 - The 3-class banding of a 7-value ordinal mark discards information. An ordinal
