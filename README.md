@@ -4,38 +4,34 @@ Can a model predict the mark an instructor gave a handwritten exam answer, from
 the answer text alone? This repository works that question on 122 real answers
 from a biosensor course and reports what the data actually supports.
 
-**Headline result: no.** The best text model reaches 63.2% cross-validated
-accuracy on a 3-class target. A rule that reads no text at all, and predicts
-each question's most common class, reaches 63.1%. Once the model knows which
-question it is grading, the answer text adds nothing measurable at this sample
-size.
+**A question-only baseline matches the text model.** Predicting each
+question's most common class, ignoring the answer entirely, reaches 63.1%
+cross-validated accuracy on a 3-class target. The best text model reaches
+63.2%. At 122 answers the text lands level with that baseline once the model
+knows which question it is grading.
 
 That is the finding. This repository is written to make it checkable.
 
 ![Results summary](figures/results_summary.png)
 
-## What changed from the first version
+## Method controls
 
-The first version of this project reported 68% held-out accuracy and read it as
-evidence that grading patterns are learnable. Three things were wrong with that.
+Four controls define what the numbers here mean.
 
-1. **No baseline.** The 68% was never compared against predicting each
-   question's majority class. That floor sits at 63.1% and the model does not
-   clear it. Question 4 alone is 26 Low marks out of 28, so a model told the
-   question number scores that question at 93% without reading a word.
-2. **Leakage into the feature definitions.** The length thresholds (600 and 400
-   characters) and the concept vocabulary were chosen by reading all 122
-   answers, and then a held-out score was reported on 25 of those same answers.
-   Those thresholds are now fitted per training fold.
-3. **One split reported as a result.** With 122 rows an 80/20 split leaves 25
-   test answers. Across 20 different stratified splits of the same data, the
-   same model scores anywhere from 40% to 76%. The 68% was one draw from that
-   spread.
-
-The concept features carry a fourth problem. `mentions_lod` fires on 100% of Q4
-answers and near 0% elsewhere. `mentions_tmb` fires on 95% of Q1 and near 0%
-elsewhere. Read pooled across questions these look like a grading rubric. They
-are question detectors. `FINDINGS.md` works through this.
+1. **A baseline to read against.** Every score sits beside predicting each
+   question's majority class, a floor of 63.1%. Question 4 alone is 26 Low marks
+   out of 28, so a model given the question number alone scores it at 93%.
+2. **Feature definitions fitted per fold.** The length thresholds (600 and 400
+   characters) and the concept vocabulary are learned inside each training fold,
+   which keeps the held-out score clear of them.
+3. **Twenty splits, reported as a spread.** With 122 rows an 80/20 split leaves
+   25 test answers, and the same model scores anywhere from 40% to 76% across 20
+   stratified splits. Cross-validated accuracy across all of them is the number
+   quoted.
+4. **Concept features read per question.** `mentions_lod` fires on 100% of Q4
+   answers and near 0% elsewhere. `mentions_tmb` fires on 95% of Q1 and near 0%
+   elsewhere. Pooled across questions these resemble a grading rubric, and they
+   behave as question detectors. `FINDINGS.md` works through this.
 
 ## Results
 
@@ -85,14 +81,13 @@ text-free question-majority rule:
 ## What the data does support
 
 Answer length correlates with mark inside each question, where question
-identity cannot explain it. Pearson r on the training split runs 0.36 on Q1,
+identity is held fixed. Pearson r on the training split runs 0.36 on Q1,
 0.59 on Q2, 0.52 on Q3, 0.65 on Q4.
 
 This is a correlation in 122 answers marked by one person on one paper. It is
 consistent with longer answers covering more of the expected content, and it is
-consistent with a length bias in the marking. This dataset cannot separate
-those, and nothing in this repository should be read as showing that writing
-more causes a higher mark.
+consistent with a length bias in the marking. Separating those two needs a
+dataset this one leaves open, so the correlation stands as a correlation.
 
 ## Repository layout
 
@@ -163,46 +158,44 @@ recomputes everything and confirms the committed files still match a fresh run,
 comparing accuracies at the three decimals this repository reports. CI runs the
 whole chain on every push, on Python 3.10 and 3.12.
 
-The leakage guarantee is tested, not only asserted. `tests/test_leakage.py`
+The leakage guarantee is tested as well as asserted. `tests/test_leakage.py`
 fails if the length thresholds stop being learned per fold, or if a sentinel
 token planted in the held-out rows reaches the fitted vocabulary.
 
 Rerunning with the default seed reproduces every reported number. Accuracies
 agree to the three decimals quoted here. Exact agreement in the last bits of a
-float depends on the BLAS build and the CPU, so it is not claimed. The library
+float depends on the BLAS build and the CPU, so three decimals is the claim. The library
 versions each committed run used are recorded in `results/metrics.json`.
 
-No API keys, no credentials, no GPU.
+Runs on a CPU, with pip-installable packages alone.
 
 ## The LLM fine-tuning attempts
 
-`failed_attempts/` holds seven runs across Gemma 2 9B and Qwen3.5-2B that never
-produced a usable prediction. Two crashed on processor and collator errors, one
-emitted garbage tokens, the rest converged to constant output.
-
-These runs failed. The reason is not that language models cannot classify. They
-can, and the standard approaches are a classification head on the encoder, a
-constrained decode over the label tokens, or a scored comparison of the
-candidate labels. None of the seven runs did any of those. They were free-form
-generation fine-tunes on 122 to 400 examples, several of them on synthetic
-data, at hyperparameters that were never swept. Attempts 4 and 5 are ordinary
+`failed_attempts/` holds seven runs across Gemma 2 9B and Qwen3.5-2B, kept for
+the record. Two stopped on processor and collator errors, one emitted garbage
+tokens, and the rest converged to constant output. Attempts 4 and 5 are ordinary
 API bugs.
 
-What the runs support is narrow. Seven specific configurations, built this way,
-on this much data, did not work. `failed_attempts/README.md` says what each one
-did.
+All seven were free-form generation fine-tunes on 122 to 400 examples, several
+on synthetic data, at default hyperparameters. Language models classify well
+through a classification head on the encoder, a constrained decode over the
+label tokens, or a scored comparison of the candidate labels, and those three
+remain to be tried here.
+
+What the runs cover is narrow: seven configurations at this data size.
+`failed_attempts/README.md` says what each one did.
 
 ## Limitations
 
 - 122 answers, 4 questions, one instructor, one paper. Roughly 30 answers per
   question, and every per-question number rests on that.
-- Marks and answer text both come from automated extraction with no measured
-  error rate. See `DATA_CARD.md`.
-- Q4 is 26 Low out of 28, so it carries almost no variation to model and it
-  inflates any pooled accuracy.
+- Marks and answer text both come from automated extraction, and measuring its
+  error rate remains open. See `DATA_CARD.md`.
+- Q4 is 26 Low out of 28, so it is close to single-valued and it inflates any
+  pooled accuracy.
 - The 3-class banding of a 7-value ordinal mark discards information. An ordinal
-  model on the raw marks was not tried.
-- Nothing here transfers to another grader, another paper, or another course.
+  model on the raw marks remains to be tried.
+- Everything here describes one grader, one paper and one course.
 
 ## Where this could go
 
