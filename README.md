@@ -21,13 +21,14 @@ Four controls define what the numbers here mean.
 1. **A baseline to read against.** Every score sits beside predicting the
    majority class per question, a floor of 63.1%. Question 4 alone is 26 Low marks
    out of 28, so a model given the question number alone scores it at 93%.
-2. **Feature definitions fitted per fold.** The length thresholds (600 and 400
-   characters) and the concept vocabulary are learned inside each training fold,
-   which keeps the held-out score clear of them.
+2. **Feature definitions fitted per fold.** The length cut-offs are the 25th and
+   75th percentiles of the training fold, and the concept vocabulary is fitted on
+   the training fold, which keeps the held-out score clear of them.
 3. **Twenty splits, reported as a spread.** With 122 rows an 80/20 split leaves
    25 test answers, and the same model scores anywhere from 40% to 76% across 20
-   stratified splits. Cross-validated accuracy across all of them is the number
-   quoted.
+   stratified splits. This sweep is a sensitivity check on single-split reporting.
+   Every accuracy in Results comes from the repeated cross-validation described
+   there.
 4. **Concept features read per question.** `mentions_lod` fires on 100% of Q4
    answers and near 0% elsewhere. `mentions_tmb` fires on 95% of Q1 and near 0%
    elsewhere. Pooled across questions these resemble a grading rubric, and they
@@ -107,7 +108,7 @@ dataset this one leaves open, so the correlation stands as a correlation.
 │
 ├── src/grading/
 │   ├── data.py            loading and the 3-class label definition
-│   ├── features.py        transformers that fit their thresholds on train rows
+│   ├── features.py        transformers that fit the thresholds on train rows
 │   └── models.py          the baseline ladder and the full model
 │
 ├── scripts/
